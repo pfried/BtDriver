@@ -31,10 +31,10 @@ int main (void) {
 	
 	board_init();
 	sysclk_init();
-	car_bluetooth_setup();
+	carBluetoothSetup();
 	
 	while(true) {
-		car_bluetooth_process();
+		carBluetoothProcess();
 	}
 	
 }

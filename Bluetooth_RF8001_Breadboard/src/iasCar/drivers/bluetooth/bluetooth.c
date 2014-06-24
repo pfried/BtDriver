@@ -28,6 +28,8 @@ static hal_aci_data_t aci_cmd;
 static bool radio_ack_pending  = false;
 static bool timing_change_done = false;
 
+static bool connected = false;
+
 // Interrupt handler
 static bt_callback_t bt_callback;
 
@@ -219,7 +221,7 @@ void bluetooth_process(void) {
 
 					case ACI_DEVICE_STANDBY:
 						//Looking for a Phone by sending radio advertisements
-						//When an iPhone connects to us we will get an ACI_EVT_CONNECTED event from the nRF8001
+						//When a phone connects to us we will get an ACI_EVT_CONNECTED event from the nRF8001
 						if (aci_evt->params.device_started.hw_error)
 						{
 							delay(20); //Handle the HW error event correctly.
@@ -243,6 +245,7 @@ void bluetooth_process(void) {
 				//Get the device version of the nRF8001 and store it in the Hardware Revision String
 				lib_aci_device_version();
 				BT_LED_On();
+				connected = true;
 				break;
 			}
 			
@@ -250,6 +253,7 @@ void bluetooth_process(void) {
 			{
 				lib_aci_connect(0/* in seconds  : 0 means forever */, 0x0050 /* advertising interval 50ms*/);
 				BT_LED_Off();
+				connected = false;
 				break;
 			}
 			
@@ -277,7 +281,14 @@ void bluetooth_process(void) {
 					// The Horn, möp möp
 					case PIPE_HORN_HORN_RX:
 					{
-						LED_On(LED1);
+						if(aci_evt->params.data_received.rx_data.aci_data[0] == 0x00) {
+							LED_On(LED1);
+						};
+						
+						if(aci_evt->params.data_received.rx_data.aci_data[0] == 0x11) {
+							LED_Off(LED1);
+						};
+						
 						break;
 					}
 					// The lights and blinkers
@@ -314,7 +325,7 @@ void bluetooth_process(void) {
 			{
 				/** check if the peer has subscribed to
 				*/
-				if (lib_aci_is_pipe_available(&aci_state, PIPE_BRIGHTNESS_BRIGHTNESS_TX) && (false == timing_change_done) )
+				if (lib_aci_is_pipe_available(&aci_state, PIPE_BRIGHTNESS_BRIGHTNESS_TX) && (false == timing_change_done))
 				{
 					/*
 					Request a change to the link timing as set in the GAP -> Preferred Peripheral Connection Parameters
@@ -323,6 +334,7 @@ void bluetooth_process(void) {
 					lib_aci_change_timing_GAP_PPCP();
 					timing_change_done = true;
 				}
+				
 				break;
 			}
 			
@@ -387,13 +399,13 @@ void bluetooth_process(void) {
 	{
 		if (SETUP_SUCCESS == do_aci_setup(&aci_state))
 		{
+			char name[PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE] = "IASAuto2";
+			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, name, PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE);
 			setup_required = false;
 		}
 	}		
 	
 }
-
-
 
 void bluetooth_get_config_defaults(bluetooth_config_t *bluetooth_config) {
 	bluetooth_config->spi = &SPIC;
