@@ -277,6 +277,7 @@ void bluetooth_process(void) {
 					// The Horn, möp möp
 					case PIPE_HORN_HORN_RX:
 					{
+						LED_On(LED1);
 						break;
 					}
 					// The lights and blinkers
