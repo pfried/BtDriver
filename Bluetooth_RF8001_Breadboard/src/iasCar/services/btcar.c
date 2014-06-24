@@ -12,7 +12,7 @@
 bluetooth_car_t bluetooth_car;
 
 // A model to synchronize Bluetooth and Car, initialize Values to 0;
-void initCarModel(void) {
+static void initCarModel(void) {
 	bluetooth_car.speed = 0x0000;
 	bluetooth_car.direction = 0x0000;
 	bluetooth_car.speedMode = 0x00;
@@ -35,10 +35,12 @@ void carBluetoothSetup(void) {
 	// Setup LED
 	bluetooth_led_setup();
 	
+	initCarModel();
+	
 	// Setup BT Driver
 	bluetooth_config_t bluetooth_config;
 	bluetooth_get_config_defaults(&bluetooth_config);
-	bluetooth_init(&bluetooth_config);
+	bluetooth_init(&bluetooth_config, &bluetooth_car);
 	
 }
 
@@ -70,6 +72,10 @@ void bluetoothSetBrightness(uint16_t brightness) {
 	bluetooth_car.brightness = brightness;
 }
 
+void bluetoothSetTemperature(uint16_t temperature) {
+	bluetooth_car.temperature = temperature;
+}
+
 void bluetoothSetDistanceIRFront(uint16_t distance) {
 	bluetooth_car.distance_ir_front = distance;
 }
@@ -94,7 +100,15 @@ void bluetoothSetGenericActor1(uint16_t actor) {
 	bluetooth_car.generic_actor_1 = actor;
 }
 
+uint16_t bluetoothGetGenericActor1(void) {
+	return bluetooth_car.generic_actor_1;
+}
+
 void bluetoothSetGenericActor2(uint16_t actor) {
 	bluetooth_car.generic_actor_2 = actor;
+}
+
+uint16_t bluetoothGetGenericActor2(void) {
+	return bluetooth_car.generic_actor_2;
 }
 

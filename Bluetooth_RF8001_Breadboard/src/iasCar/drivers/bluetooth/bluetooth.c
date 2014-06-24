@@ -30,6 +30,8 @@ static bool timing_change_done = false;
 
 static bool connected = false;
 
+static bluetooth_car_t *car;
+
 // Interrupt handler
 static bt_callback_t bt_callback;
 
@@ -131,7 +133,9 @@ void detachInterrupt(port_pin_t pin) {
 }
 
 
-void bluetooth_init(bluetooth_config_t *bluetooth_config) {
+void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluetooth_car) {
+	
+	car = bluetooth_car;
 	
 	spi_init_pins();
 
@@ -264,45 +268,45 @@ void bluetooth_process(void) {
 					// Speed and Angle
 					case PIPE_DRIVE_SPEEDANDANGLE_RX:
 					{
+						car->speed = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
+						car->direction = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[2] << 8) | aci_evt->params.data_received.rx_data.aci_data[3];
 						break;
 					}
 					
 					// Speed Mode
 					case PIPE_DRIVE_SPEEDMODE_RX_ACK_AUTO:
 					{
+						car->speedMode = aci_evt->params.data_received.rx_data.aci_data[0];
 						break;
 					}
 					
 					// Sensor Sevo
 					case PIPE_DISTANCE_SENSORSERVO_RX:
 					{
+						car->sensorServo = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
 						break;
 					}
 					// The Horn, möp möp
 					case PIPE_HORN_HORN_RX:
 					{
-						if(aci_evt->params.data_received.rx_data.aci_data[0] == 0x00) {
-							LED_On(LED1);
-						};
-						
-						if(aci_evt->params.data_received.rx_data.aci_data[0] == 0x11) {
-							LED_Off(LED1);
-						};
-						
+						car->horn = aci_evt->params.data_received.rx_data.aci_data[0];
 						break;
 					}
 					// The lights and blinkers
 					case PIPE_LIGHTS_LIGHTS_RX_ACK_AUTO:
 					{
+						car->lights = aci_evt->params.data_received.rx_data.aci_data[0];
 						break;
 					}
 					// The Generic Actors
 					case PIPE_GENERIC_GENERICACTOR1_RX_ACK_AUTO:
 					{
+						car->generic_actor_1 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
 						break;
 					}
 					case PIPE_GENERIC_GENERICACTOR2_RX_ACK_AUTO:
 					{
+						car->generic_actor_2 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
 						break;
 					}
 					
@@ -403,7 +407,7 @@ void bluetooth_process(void) {
 			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, name, PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE);
 			setup_required = false;
 		}
-	}		
+	}
 	
 }
 

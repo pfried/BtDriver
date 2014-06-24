@@ -6,6 +6,7 @@
  */ 
 
 #include <stdint.h>
+#include "bluetooth.h"
 
 #ifndef BTCAR_H_
 #define BTCAR_H_
@@ -29,8 +30,9 @@ typedef struct bluetooth_car  {
 } bluetooth_car_t;
 
 void carBluetoothSetup(void);
-
 void carBluetoothProcess(void);
+
+static void initCarModel(void);
 
 uint16_t bluetoothGetDirection(void);
 uint16_t bluetoothGetSpeed(void);
@@ -46,11 +48,11 @@ void bluetoothSetDistanceUSFront(uint16_t distance);
 void bluetoothSetDistanceUSRear(uint16_t distance);
 
 void bluetoothSetBatteryLevel(uint16_t battery);
+void bluetoothSetTemperature(uint16_t temperature);
 
 void bluetoothSetGenericActor1(uint16_t actor);
-
+uint16_t bluetoothGetGenericActor1(void);
 void bluetoothSetGenericActor2(uint16_t actor);
-
-
+uint16_t bluetoothGetGenericActor2(void);
 
 #endif /* BTCAR_H_ */

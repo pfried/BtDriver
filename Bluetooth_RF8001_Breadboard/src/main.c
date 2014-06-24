@@ -27,6 +27,9 @@
 #include <asf.h>
 #include "btcar.h"
 
+uint8_t hornState;
+uint16_t genericActor1State;
+
 int main (void) {
 	
 	board_init();
@@ -35,6 +38,15 @@ int main (void) {
 	
 	while(true) {
 		carBluetoothProcess();
+		
+		hornState = bluetoothGetHorn();
+		genericActor1State = bluetoothGetGenericActor1();
+		
+		if(genericActor1State == 0x0001) {
+			LED_On(LED1);
+		} else {
+			LED_Off(LED1);
+		}
 	}
 	
 }
