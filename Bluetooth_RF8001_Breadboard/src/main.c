@@ -25,22 +25,20 @@
  * Atmel Software Framework (ASF).
  */
 #include <asf.h>
-#include "iascar.h"
+#include "btcar.h"
 
 int main (void) {
 	
-	
-	
 	board_init();
 	sysclk_init();
-	iascar_setup();
+	car_bluetooth_setup();
 
 	// Insert application code here, after the board has been initialized.
 	LED_On(LED1);
 	
 	//deselect_bluetooth_spi();
 	while(true) {
-		
+		car_bluetooth_process();
 	}
 	
 }

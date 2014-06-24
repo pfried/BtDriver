@@ -15,7 +15,6 @@
     <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
     <option id="common.services.basic.spi_master" value="Add" config="standard_spi" content-id="Atmel.ASF" />
     <option id="xmega.drivers.ioport" value="Add" config="" content-id="Atmel.ASF" />
-    <option id="xmega.drivers.pmic" value="Add" config="" content-id="Atmel.ASF" />
     <option id="common.applications.user_application" value="Add" config="" content-id="Atmel.ASF" />
   </options>
   <configurations>
@@ -70,7 +69,6 @@
     <file path="src/Config/conf_spi_master.h" framework="" version="3.11.0" source="common\services\spi\xmega_spi\module_config\conf_spi_master.h" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/common/services/delay/delay.h" framework="" version="3.11.0" source="common\services\delay\delay.h" changed="False" content-id="Atmel.ASF" />
     <file path="src/ASF/common/services/delay/xmega/cycle_counter.h" framework="" version="3.11.0" source="common\services\delay\xmega\cycle_counter.h" changed="False" content-id="Atmel.ASF" />
-    <file path="src/ASF/xmega/drivers/pmic/pmic.h" framework="" version="3.11.0" source="xmega\drivers\pmic\pmic.h" changed="False" content-id="Atmel.ASF" />
   </files>
   <documentation help="http://asf.atmel.com/docs/3.11.0/common.applications.user_application.xmega_e5_xplained/html/index.html" />
   <offline-documentation help="" />
@@ -145,7 +143,6 @@
       <Value>../src/ASF/common/services/spi/xmega_spi</Value>
       <Value>../src/ASF/common/services/spi</Value>
       <Value>../src/ASF/common/services/delay</Value>
-      <Value>../src/ASF/xmega/drivers/pmic</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -172,7 +169,6 @@
       <Value>../src/ASF/common/services/spi/xmega_spi</Value>
       <Value>../src/ASF/common/services/spi</Value>
       <Value>../src/ASF/common/services/delay</Value>
-      <Value>../src/ASF/xmega/drivers/pmic</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
 </AvrGcc>
@@ -217,7 +213,7 @@
       <Value>../src/iasCar/drivers</Value>
       <Value>../src/iasCar/services</Value>
       <Value>../src/iasCar/drivers/bluetooth</Value>
-      <Value>../src/ASF/xmega/drivers/pmic</Value>
+      <Value>../src/iasCar/drivers/bt_active_led</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -245,7 +241,6 @@
       <Value>../src/ASF/common/services/spi/xmega_spi</Value>
       <Value>../src/ASF/common/services/spi</Value>
       <Value>../src/ASF/common/services/delay</Value>
-      <Value>../src/ASF/xmega/drivers/pmic</Value>
     </ListValues>
   </avrgcc.assembler.general.IncludePaths>
   <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
@@ -307,9 +302,6 @@
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\xmega\drivers\cpu\xmega_reset_cause.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\ASF\xmega\drivers\pmic\pmic.h">
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\ASF\xmega\drivers\spi\spi.c">
@@ -405,10 +397,16 @@
     <Compile Include="src\iasCar\drivers\bluetooth\lib\services_lock.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\services\iascar.c">
+    <Compile Include="src\iasCar\drivers\bt_active_led\bt_active_led.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\services\iascar.h">
+    <Compile Include="src\iasCar\drivers\bt_active_led\bt_active_led.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\iasCar\services\btcar.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\iasCar\services\btcar.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\main.c">
@@ -517,7 +515,6 @@
     <Folder Include="src\ASF\xmega\boards\xmega_e5_xplained\" />
     <Folder Include="src\ASF\xmega\drivers\" />
     <Folder Include="src\ASF\xmega\drivers\cpu\" />
-    <Folder Include="src\ASF\xmega\drivers\pmic\" />
     <Folder Include="src\ASF\xmega\drivers\spi\" />
     <Folder Include="src\ASF\xmega\utils\" />
     <Folder Include="src\ASF\xmega\utils\assembler\" />
@@ -528,6 +525,7 @@
     <Folder Include="src\iasCar\drivers" />
     <Folder Include="src\iasCar\drivers\bluetooth" />
     <Folder Include="src\iasCar\drivers\bluetooth\lib" />
+    <Folder Include="src\iasCar\drivers\bt_active_led" />
     <Folder Include="src\iasCar\services" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\AvrGCC.targets" />
