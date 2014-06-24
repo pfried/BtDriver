@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Bluetooth_RF8001_Breadboard", "Bluetooth_RF8001_Breadboard\Bluetooth_RF8001_Breadboard.cproj", "{F7802BC7-201C-459D-B039-6E8B2D34FC75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7802BC7-201C-459D-B039-6E8B2D34FC75}.Debug|AVR.ActiveCfg = Debug|AVR
+		{F7802BC7-201C-459D-B039-6E8B2D34FC75}.Debug|AVR.Build.0 = Debug|AVR
+		{F7802BC7-201C-459D-B039-6E8B2D34FC75}.Release|AVR.ActiveCfg = Release|AVR
+		{F7802BC7-201C-459D-B039-6E8B2D34FC75}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
