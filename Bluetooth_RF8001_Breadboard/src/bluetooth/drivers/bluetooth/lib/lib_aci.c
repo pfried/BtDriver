@@ -35,7 +35,7 @@
 #include "hal_aci_tl.h"
 #include "aci_queue.h"
 #include "lib_aci.h"
-#include "bluetooth.h"
+#include "../bluetooth.h"
 
 
 #define LIB_ACI_DEFAULT_CREDIT_NUMBER   1

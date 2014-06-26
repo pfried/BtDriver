@@ -26,7 +26,7 @@
 #include "hal_aci_tl.h"
 #include "aci_queue.h"
 #include "ble_assert.h"
-#include "bluetooth.h"
+#include "../bluetooth.h"
 
 #include <stddef.h>
 #include <string.h>
