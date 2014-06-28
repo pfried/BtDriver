@@ -6,8 +6,8 @@
  */
 
 #include "btcar.h"
-#include "bluetooth.h"
-#include "bt_active_led.h"
+#include "../drivers/bluetooth/bluetooth.h"
+#include "../drivers/bt_active_led/bt_active_led.h"
 
 bluetooth_car_t bluetooth_car;
 

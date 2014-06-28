@@ -28,8 +28,6 @@ static hal_aci_data_t aci_cmd;
 static bool radio_ack_pending  = false;
 static bool timing_change_done = false;
 
-static bool connected = false;
-
 static bluetooth_car_t *car;
 
 // Interrupt handler
@@ -204,6 +202,8 @@ void bluetooth_process(void) {
 	// The Setup needs to be transfered to the NRF8001 Chip on startup, flag indicates if we need to setup the device
 	static bool setup_required = false;
 	
+	static uint16_t oldVal = 0x0000;
+	
 	// Basically getting events from the event queue
 	if(lib_aci_event_get(&aci_state, &aci_data)) {
 		
@@ -250,15 +250,13 @@ void bluetooth_process(void) {
 				//Get the device version of the nRF8001 and store it in the Hardware Revision String
 				lib_aci_device_version();
 				BT_LED_On();
-				connected = true;
 				break;
 			}
 			
 			case ACI_EVT_DISCONNECTED:
 			{
-				lib_aci_connect(0/* in seconds  : 0 means forever */, 0x0050 /* advertising interval 50ms*/);
 				BT_LED_Off();
-				connected = false;
+				lib_aci_connect(0/* in seconds  : 0 means forever */, 0x0050 /* advertising interval 50ms*/);
 				break;
 			}
 			
@@ -326,18 +324,32 @@ void bluetooth_process(void) {
 				break;
 			}
 			
+			// If the bluetooth central requests data it opens a pipe on the nrf, so we can send data in reply
 			case ACI_EVT_PIPE_STATUS:
 			{
 				/** check if the peer has subscribed to
 				*/
-				if (lib_aci_is_pipe_available(&aci_state, PIPE_BRIGHTNESS_BRIGHTNESS_TX) && (false == timing_change_done))
+				if (false == timing_change_done)
 				{
 					/*
 					Request a change to the link timing as set in the GAP -> Preferred Peripheral Connection Parameters
 					Change the setting in nRFgo studio -> nRF8001 configuration -> GAP Settings and recompile the xml file.
 					*/
 					lib_aci_change_timing_GAP_PPCP();
-					timing_change_done = true;
+				} else {
+					
+					if(lib_aci_is_pipe_available(&aci_state, PIPE_BRIGHTNESS_BRIGHTNESS_TX) && aci_state.data_credit_available > 0)
+					{
+						//if(oldVal != car->brightness) {
+							uint8_t val[PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE];
+							val[0] = 0x12;
+							val[1] = 0x34;
+							lib_aci_send_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, val, PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE);
+							lib_aci_set_local_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, val, PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE);
+							aci_state.data_credit_available--;
+						//}
+					}
+					
 				}
 				
 				break;
@@ -389,6 +401,7 @@ void bluetooth_process(void) {
 			// Timing has change, we do not need to do anything here
 			case ACI_EVT_TIMING:
 			{
+				timing_change_done = true;
 				break;
 			}
 			

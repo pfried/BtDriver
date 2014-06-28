@@ -316,100 +316,100 @@
     <None Include="src\config\conf_spi_master.h">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="src\Bluetooth.h">
+    <Compile Include="src\bluetooth\BluetoothCar.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\bluetooth.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\bluetooth.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\bluetooth.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\bluetooth.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\acilib.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\acilib.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\acilib.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\acilib.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\acilib_defs.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\acilib_defs.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\acilib_if.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\acilib_if.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\acilib_types.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\acilib_types.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci_cmds.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci_cmds.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci_evts.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci_evts.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci_protocol_defines.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci_protocol_defines.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci_queue.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci_queue.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci_queue.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci_queue.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci_setup.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci_setup.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\aci_setup.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci_setup.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\ble_assert.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\ble_assert.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\boards.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\boards.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\dfu.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\dfu.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\dfu.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\dfu.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\dtm.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\dtm.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\hal_aci_tl.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\hal_aci_tl.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\hal_aci_tl.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\hal_aci_tl.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\hal_platform.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\hal_platform.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\lib_aci.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\lib_aci.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\lib_aci.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\lib_aci.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\services.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\services.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bluetooth\lib\services_lock.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\lib\services_lock.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bt_active_led\bt_active_led.c">
+    <Compile Include="src\bluetooth\drivers\bt_active_led\bt_active_led.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\drivers\bt_active_led\bt_active_led.h">
+    <Compile Include="src\bluetooth\drivers\bt_active_led\bt_active_led.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\services\btcar.c">
+    <Compile Include="src\bluetooth\services\btcar.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\iasCar\services\btcar.h">
+    <Compile Include="src\bluetooth\services\btcar.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\main.c">
@@ -524,12 +524,12 @@
     <Folder Include="src\ASF\xmega\utils\bit_handling\" />
     <Folder Include="src\ASF\xmega\utils\preprocessor\" />
     <Folder Include="src\config\" />
-    <Folder Include="src\iasCar" />
-    <Folder Include="src\iasCar\drivers" />
-    <Folder Include="src\iasCar\drivers\bluetooth" />
-    <Folder Include="src\iasCar\drivers\bluetooth\lib" />
-    <Folder Include="src\iasCar\drivers\bt_active_led" />
-    <Folder Include="src\iasCar\services" />
+    <Folder Include="src\bluetooth" />
+    <Folder Include="src\bluetooth\drivers" />
+    <Folder Include="src\bluetooth\drivers\bluetooth" />
+    <Folder Include="src\bluetooth\drivers\bluetooth\lib" />
+    <Folder Include="src\bluetooth\drivers\bt_active_led" />
+    <Folder Include="src\bluetooth\services" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\AvrGCC.targets" />
 </Project>
