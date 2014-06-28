@@ -28,14 +28,17 @@ static void initCarModel(void) {
 	bluetooth_car.lights = 0x00;
 	bluetooth_car.generic_actor_1 = 0x0000;
 	bluetooth_car.generic_actor_2 = 0x0000;
+	bluetooth_car.name = "defaultCar";
 }
 
-void carBluetoothSetup(void) {
+void carBluetoothSetup(char *name) {
 	
 	// Setup LED
 	bluetooth_led_setup();
 	
 	initCarModel();
+	
+	bluetooth_car.name = name;
 	
 	// Setup BT Driver
 	bluetooth_config_t bluetooth_config;

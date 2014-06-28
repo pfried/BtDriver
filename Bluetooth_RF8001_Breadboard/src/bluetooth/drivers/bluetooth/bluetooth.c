@@ -417,8 +417,8 @@ void bluetooth_process(void) {
 	{
 		if (SETUP_SUCCESS == do_aci_setup(&aci_state))
 		{
-			char name[PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE] = "IASAuto2";
-			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, name, PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE);
+			// We set the device name which appears in the Scan data (advertising is configured in nRF Go Studio)
+			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, car->name, PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE);
 			setup_required = false;
 		}
 	}

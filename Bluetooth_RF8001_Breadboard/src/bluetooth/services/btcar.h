@@ -7,6 +7,7 @@
 
 #include <stdint.h>
 #include "../drivers/bluetooth/bluetooth.h"
+#include "../drivers/bluetooth/lib/services.h"
 
 #ifndef BTCAR_H_
 #define BTCAR_H_
@@ -27,9 +28,10 @@ typedef struct bluetooth_car  {
 	uint16_t generic_actor_1;
 	uint16_t generic_actor_2;
 	uint16_t temperature;
+	char *name;
 } bluetooth_car_t;
 
-void carBluetoothSetup(void);
+void carBluetoothSetup(char name[PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE]);
 void carBluetoothProcess(void);
 
 static void initCarModel(void);
