@@ -50,7 +50,6 @@ void carBluetoothSetup(char *name) {
 // Process the bluetooth data
 void carBluetoothProcess(void) {
 	bluetooth_process();
-	bluetooth_values_process();
 }
 
 uint16_t bluetoothGetSpeed(void) {

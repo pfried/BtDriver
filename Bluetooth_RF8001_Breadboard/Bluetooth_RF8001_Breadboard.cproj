@@ -325,6 +325,12 @@
     <Compile Include="src\bluetooth\drivers\bluetooth\bluetooth.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\brightness.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\brightness.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci.h">
       <SubType>compile</SubType>
     </Compile>
@@ -523,6 +529,7 @@
     <Folder Include="src\ASF\xmega\utils\assembler\" />
     <Folder Include="src\ASF\xmega\utils\bit_handling\" />
     <Folder Include="src\ASF\xmega\utils\preprocessor\" />
+    <Folder Include="src\bluetooth\drivers\bluetooth\characteristics" />
     <Folder Include="src\config\" />
     <Folder Include="src\bluetooth" />
     <Folder Include="src\bluetooth\drivers" />
