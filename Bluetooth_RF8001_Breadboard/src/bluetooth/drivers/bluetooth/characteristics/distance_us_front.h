@@ -5,7 +5,6 @@
  *  Author: fried_000
  */ 
 
-
 #ifndef DISTANCE_US_FRONT_H_
 #define DISTANCE_US_FRONT_H_
 
