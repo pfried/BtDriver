@@ -59,6 +59,7 @@ typedef void (*bt_callback_t)(void);
 
 void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluetooth_car);
 void bluetooth_process(void);
+void bluetooth_values_process(void);
 
 bool digitalRead(port_pin_t pin);
 void digitalWrite(port_pin_t pin, bool value);

@@ -336,20 +336,6 @@ void bluetooth_process(void) {
 					Change the setting in nRFgo studio -> nRF8001 configuration -> GAP Settings and recompile the xml file.
 					*/
 					lib_aci_change_timing_GAP_PPCP();
-				} else {
-					
-					if(lib_aci_is_pipe_available(&aci_state, PIPE_BRIGHTNESS_BRIGHTNESS_TX) && aci_state.data_credit_available > 0)
-					{
-						//if(oldVal != car->brightness) {
-							uint8_t val[PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE];
-							val[0] = 0x12;
-							val[1] = 0x34;
-							lib_aci_send_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, val, PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE);
-							lib_aci_set_local_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, val, PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE);
-							aci_state.data_credit_available--;
-						//}
-					}
-					
 				}
 				
 				break;
@@ -423,6 +409,53 @@ void bluetooth_process(void) {
 		}
 	}
 	
+}
+
+static int pipe_counter = 1;
+
+void bluetooth_values_process(void) {
+	
+	if(timing_change_done == true) {
+		
+		// We can send data over the air since the pipe is open and we have credits left
+		if(aci_state.data_credit_available > 0 && lib_aci_is_pipe_available(&aci_state, pipe_counter)) {
+			
+			switch(pipe_counter) {
+				case PIPE_BRIGHTNESS_BRIGHTNESS_TX:
+				{
+					uint8_t val[PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE];
+					val[0] = car->brightness;
+					val[1] = (car->brightness >> 8);
+					lib_aci_send_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, val, PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE);
+					aci_state.data_credit_available--;
+					break;
+				}
+			}
+			
+			pipe_counter++;
+		}
+
+		// Simply set the local data
+		else
+		{
+			switch(pipe_counter) {
+				case PIPE_BRIGHTNESS_BRIGHTNESS_TX:
+				{
+					uint8_t val[PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE];
+					val[0] = car->brightness;
+					val[1] = (car->brightness >> 8);
+					//lib_aci_set_local_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, val, PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE);
+					break;
+				}
+			}
+			
+			pipe_counter++;
+		}
+		
+		if (pipe_counter > NUMBER_OF_PIPES) {
+			pipe_counter = 1;
+		}
+	}
 }
 
 void bluetooth_get_config_defaults(bluetooth_config_t *bluetooth_config) {

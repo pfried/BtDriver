@@ -36,7 +36,7 @@ int main (void) {
 	board_init();
 	sysclk_init();
 	// Max 10 chars
-	carBluetoothSetup("MartinCar");
+	carBluetoothSetup("FranziCar");
 	
 	while(true) {
 		carBluetoothProcess();

@@ -416,7 +416,7 @@ bool lib_aci_send_data(uint8_t pipe, uint8_t *p_value, uint8_t size)
       memcpy(&(aci_cmd_params_send_data.tx_data.aci_data[0]), p_value, size);
       acil_encode_cmd_send_data(&(msg_to_send.buffer[0]), &aci_cmd_params_send_data, size);
       
-      ret_val = hal_aci_tl_send(&msg_to_send);          
+      ret_val = hal_aci_tl_send(&msg_to_send);
   }
   return ret_val;
 }
