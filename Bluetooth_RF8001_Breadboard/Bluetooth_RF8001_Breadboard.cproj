@@ -325,10 +325,28 @@
     <Compile Include="src\bluetooth\drivers\bluetooth\bluetooth.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\battery.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\battery.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\brightness.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\brightness.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_front.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_front.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_rear.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_rear.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_us_front.c">
