@@ -1,10 +1,10 @@
-/*
- * bluetooth.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 21.05.2014 16:57:00
- *  Author: Friedrich Maeckle
+ * @brief Header of the Bluetooth Driver
  */ 
-
 
 #ifndef BLUETOOTH_H_
 #define BLUETOOTH_H_
@@ -16,6 +16,7 @@
 #include "lib/lib_aci.h"
 #include "lib/aci_setup.h"
 #include "lib/services.h"
+#include "../../services/btcar.h"
 
 
 #define BLUETOOTH_DATA_RATE 1
@@ -56,8 +57,9 @@ typedef struct bluetooth_config  {
 // Interrupt callback type
 typedef void (*bt_callback_t)(void);
 
-void bluetooth_init(bluetooth_config_t *bluetooth_config);
+void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluetooth_car);
 void bluetooth_process(void);
+void bluetooth_values_process(void);
 
 bool digitalRead(port_pin_t pin);
 void digitalWrite(port_pin_t pin, bool value);

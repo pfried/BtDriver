@@ -1,11 +1,10 @@
-BtDriver
-========
+# BtDriver
 
 Bluetooth Low Energy nRF8001 Driver for XMEGA
 
 Studienarbeit Friedrich Mäckle IAS Universtiy of Stuttgart, 2014
 
-# Ported Driver from Nordic Semiconductor
+## Ported Driver from Nordic Semiconductor
 The Bluetooth Driver consists of the actual driver which is a port to XMEGA from the Nordic Semiconductor Driver for Arduino: https://github.com/NordicSemiconductor/ble-sdk-arduino
 
 There are changes regarding:
@@ -18,13 +17,13 @@ There are changes regarding:
 
 The driver supports both interrupt and polling interface of the driver.
 
-# Bluetooth Driver
+## Bluetooth Driver
 
-## ASF
+### ASF
 
 The driver uses the Atmel Software Foundation Framework to interact with SPI, delay and GPIO
 
-# Bluetooth Service
+## Bluetooth Service
 
 The Bluetooth Service provides an interface to the IAS Teamarbeit (Teamwork). The students in the course program a remote controlled car which is equipped with several sensors. The students implement a simple driver assistant.
 

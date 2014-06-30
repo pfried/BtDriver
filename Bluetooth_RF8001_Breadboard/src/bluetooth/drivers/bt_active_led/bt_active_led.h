@@ -1,11 +1,12 @@
-/*
- * bt_active_led.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 24.06.2014 08:57:42
- *  Author: fried_000
- */ 
+ * @brief Header of the Bluetooth Active LED
+ */
 
-#include <gpio.h>
+#include <ioport.h>
 
 #ifndef BT_ACTIVE_LED_H_
 #define BT_ACTIVE_LED_H_
@@ -16,17 +17,17 @@
 /**
  * \brief Turns off the Bluetooth Active Indicator LED
  */
-#define BT_LED_Off() gpio_set_pin_high(BT_LED)
+#define BT_LED_Off() ioport_set_pin_level(BT_LED, HIGH);
 
 /**
  * \brief Turns on the Bluetooth Active Indicator LED
  */
-#define BT_LED_On() gpio_set_pin_low(BT_LED)
+#define BT_LED_On() ioport_set_pin_level(BT_LED, LOW);
 
 /**
  * \brief Toggles the Bluetooth Active Indicator LED
  */
-#define BT_LED_Toggle() gpio_toggle_pin(BT_LED)
+#define BT_LED_Toggle() ioport_toggle_pin_level(BT_LED)
 
 void bluetooth_led_setup(void);
 

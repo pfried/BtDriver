@@ -29,7 +29,7 @@
 #include "aci_queue.h"
 #include <avr/sleep.h>
 #include <spi_master.h>
-#include "bluetooth.h"
+#include "../bluetooth.h"
 
 /*
 PIC32 supports only MSbit transfer on SPI and the nRF8001 uses LSBit
