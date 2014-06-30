@@ -9,7 +9,9 @@
 #include "characteristic_util.h"
 
 // Put a 16 bit value in two 8 bit values
+
 uint8_t toBluetoothData(uint16_t input_value) {
+
 	uint8_t output_val[2];
 	
 	output_val[0] = (input_value >> 8);
