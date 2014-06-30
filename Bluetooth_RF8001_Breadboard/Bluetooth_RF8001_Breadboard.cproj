@@ -367,6 +367,18 @@
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_us_rear.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\generic_actor_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\generic_actor_1.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\generic_actor_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\generic_actor_2.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\horn.c">
       <SubType>compile</SubType>
     </Compile>
@@ -377,6 +389,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\lights.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\sensor_servo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\sensor_servo.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\speed_and_angle.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\speed_and_angle.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\speed_mode.c">

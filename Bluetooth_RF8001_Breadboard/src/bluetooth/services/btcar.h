@@ -53,6 +53,8 @@ void bluetoothSetDistanceUSRear(uint16_t distance);
 void bluetoothSetBatteryLevel(uint16_t battery);
 void bluetoothSetTemperature(uint16_t temperature);
 
+void bluetoothSetSensorServo(uint16_t servo);
+
 void bluetoothSetGenericActor1(uint16_t actor);
 uint16_t bluetoothGetGenericActor1(void);
 void bluetoothSetGenericActor2(uint16_t actor);

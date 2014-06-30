@@ -29,8 +29,8 @@ void distance_ir_front_update(aci_state_t *aci_state, uint16_t *distance) {
 	
 	if(distance_difference >= DISTANCE_IR_FRONT_LVL_THRESHOLD) {
 		
-		distance_value[0] = (*distance >> 8);
-		distance_value[1] = *distance;
+		distance_value[0] = *distance;
+		distance_value[1] = (*distance >> 8);
 		
 		lib_aci_set_local_data(PIPE_DISTANCE_DISTANCEIRFRONT_TX, distance_value, PIPE_DISTANCE_DISTANCEIRFRONT_TX_MAX_SIZE);
 		
@@ -46,8 +46,10 @@ void distance_ir_front_update(aci_state_t *aci_state, uint16_t *distance) {
 
 void distance_ir_front_on_pipe_status(aci_state_t *aci_state, uint16_t *distance) {
 	if(lib_aci_is_pipe_available(aci_state, PIPE_DISTANCE_DISTANCEIRFRONT_TX)) {
-		distance_value[0] = (*distance >> 8);
-		distance_value[1] = *distance;
+
+		distance_value[0] = *distance;
+		distance_value[1] = (*distance >> 8);
+		
 		distance_ir_front_send_update(aci_state, distance_value);
 	}
 }

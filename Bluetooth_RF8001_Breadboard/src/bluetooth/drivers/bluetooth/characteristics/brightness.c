@@ -30,8 +30,8 @@ brightness_update(aci_state_t *aci_state, uint16_t *newBrightness) {
 	
 	if(brightness_difference >= BRIGHTNESS_LVL_CHANGE_THRESHOLD) {
 		
-		brightness_value[0] = (*newBrightness >> 8);
-		brightness_value[1] = *newBrightness;
+		brightness_value[0] = *newBrightness;
+		brightness_value[1] = (*newBrightness >> 8);
 		
 		lib_aci_set_local_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, brightness_value, PIPE_BRIGHTNESS_BRIGHTNESS_TX_MAX_SIZE);
 		
@@ -47,8 +47,10 @@ brightness_update(aci_state_t *aci_state, uint16_t *newBrightness) {
 
 brightness_on_pipe_status(aci_state_t *aci_state, uint16_t *brightness) {
 	if(lib_aci_is_pipe_available(aci_state, PIPE_BRIGHTNESS_BRIGHTNESS_TX)) {
-		brightness_value[0] = (*brightness >> 8);
-		brightness_value[1] = *brightness;
+
+		brightness_value[0] = *brightness;
+		brightness_value[1] = (*brightness >> 8);
+		
 		brightness_send_update(aci_state, brightness_value);
 	}
 }

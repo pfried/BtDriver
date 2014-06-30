@@ -51,6 +51,8 @@ int main (void) {
 		bluetoothSetBrightness(button);
 		bluetoothSetDistanceUSFront(button2);
 		
+		bluetoothSetSensorServo(65000);
+		
 		if(genericActor1State == 0x0001) {
 			LED_On(LED1);
 		} else {

@@ -104,6 +104,10 @@ void bluetoothSetBatteryLevel(uint16_t battery) {
 	bluetooth_car.battery = battery;
 }
 
+void bluetoothSetSensorServo(uint16_t servo) {
+	bluetooth_car.sensorServo = servo;
+}
+
 void bluetoothSetGenericActor1(uint16_t actor) {
 	bluetooth_car.generic_actor_1 = actor;
 }

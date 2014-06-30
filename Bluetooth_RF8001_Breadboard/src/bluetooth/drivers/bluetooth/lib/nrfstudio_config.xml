@@ -9,7 +9,7 @@
         <Characteristic>
             <Name>Brightness</Name>
             <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0051</Uuid>
-            <DefaultValue>0000</DefaultValue>
+            <DefaultValue>0</DefaultValue>
             <UsePresentationFormat>0</UsePresentationFormat>
             <MaxDataLength>2</MaxDataLength>
             <AttributeLenType>1</AttributeLenType>
@@ -23,7 +23,7 @@
             </Properties>
             <SetPipe>false</SetPipe>
             <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
+            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Notify>1000</Notify>
@@ -50,7 +50,7 @@
             </Properties>
             <SetPipe>false</SetPipe>
             <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
+            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Notify>60000</Notify>
@@ -73,7 +73,7 @@
             </Properties>
             <SetPipe>false</SetPipe>
             <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
+            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Notify>60000</Notify>
@@ -96,7 +96,7 @@
             </Properties>
             <SetPipe>false</SetPipe>
             <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
+            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Notify>60000</Notify>
@@ -119,7 +119,7 @@
             </Properties>
             <SetPipe>false</SetPipe>
             <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
+            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Notify>60000</Notify>
@@ -142,7 +142,7 @@
             </Properties>
             <SetPipe>false</SetPipe>
             <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
+            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <WriteWithoutResponse>60000</WriteWithoutResponse>
@@ -217,7 +217,7 @@
             <Properties>
                 <WriteWithoutResponse>true</WriteWithoutResponse>
                 <Write>false</Write>
-                <Notify>false</Notify>
+                <Notify>true</Notify>
                 <Indicate>false</Indicate>
                 <Broadcast>false</Broadcast>
             </Properties>
@@ -273,7 +273,7 @@
             </Properties>
             <SetPipe>false</SetPipe>
             <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
+            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Notify>60000</Notify>
