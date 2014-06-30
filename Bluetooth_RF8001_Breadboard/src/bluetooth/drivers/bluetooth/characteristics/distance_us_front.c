@@ -6,8 +6,6 @@
  * @brief Implementation of the Ultrasonic Distance Sensor Front characteristic
  */
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "distance_us_front.h"
 
 static uint16_t *oldDistance;

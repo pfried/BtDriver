@@ -6,8 +6,6 @@
  * @brief Implementation of the Infrared Distance Sensor Rear characteristic
  */
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "distance_ir_rear.h"
 
 static uint16_t *oldDistance;

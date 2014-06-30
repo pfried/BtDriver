@@ -9,6 +9,9 @@
 #ifndef DISTANCE_US_FRONT_H_
 #define DISTANCE_US_FRONT_H_
 
+#include "../lib/services.h"
+#include "../lib/lib_aci.h"
+
 #define DISTANCE_US_FRONT_LVL_THRESHOLD 1
 
 void distance_us_front_init(uint16_t *distance);
