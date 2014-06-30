@@ -46,12 +46,23 @@ brightness_update(aci_state_t *aci_state, uint16_t *newBrightness) {
 }
 
 brightness_on_pipe_status(aci_state_t *aci_state, uint16_t *brightness) {
+	
+	// If we dont keep track of this, all the characteristics fire at once if a pipe update occurs
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_BRIGHTNESS_BRIGHTNESS_TX)) {
-
-		brightness_value[0] = *brightness;
-		brightness_value[1] = (*brightness >> 8);
 		
-		brightness_send_update(aci_state, brightness_value);
+		if(subscribed_sent == false) {
+			brightness_value[0] = *brightness;
+			brightness_value[1] = (*brightness >> 8);
+			
+			brightness_send_update(aci_state, brightness_value);
+			subscribed_sent = true;
+			*oldBrightness = *brightness;
+		}
+		
+	} else {
+		subscribed_sent = false;
 	}
 }
 

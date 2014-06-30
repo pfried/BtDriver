@@ -45,10 +45,22 @@ void sensor_servo_update(aci_state_t *aci_state, uint16_t *sensor_servo) {
 }
 
 void sensor_servo_on_pipe_status(aci_state_t *aci_state, uint16_t *sensor_servo) {
+	
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_DISTANCE_SENSORSERVO_TX)) {
-		sensor_servo_value[0] = *sensor_servo;
-		sensor_servo_value[1] = (*sensor_servo >> 8);
-		sensor_servo_send_update(aci_state, sensor_servo_value);
+		
+		if(subscribed_sent == false) {
+			sensor_servo_value[0] = *sensor_servo;
+			sensor_servo_value[1] = (*sensor_servo >> 8);
+			
+			sensor_servo_send_update(aci_state, sensor_servo_value);
+			subscribed_sent = true;
+			*old_sensor_servo = *sensor_servo;	
+		}
+		
+	} else {
+		subscribed_sent = false;
 	}
 }
 

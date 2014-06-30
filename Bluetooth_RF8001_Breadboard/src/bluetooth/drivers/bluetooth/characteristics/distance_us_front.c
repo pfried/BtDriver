@@ -45,12 +45,22 @@ void distance_us_front_update(aci_state_t *aci_state, uint16_t *distance) {
 }
 
 void distance_us_front_on_pipe_status(aci_state_t *aci_state, uint16_t *distance) {
+	
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_DISTANCE_DISTANCEUSFRONT_TX)) {
 		
-		distance_value[0] = *distance;
-		distance_value[1] = (*distance >> 8);
+		if(subscribed_sent == false) {
+			distance_value[0] = *distance;
+			distance_value[1] = (*distance >> 8);
+			
+			distance_us_front_send_update(aci_state, distance_value);
+			subscribed_sent = true;
+			*oldDistance = *distance;
+		}
 		
-		distance_us_front_send_update(aci_state, distance_value);
+	} else {
+		subscribed_sent = false;
 	}
 }
 

@@ -45,9 +45,21 @@ void speed_mode_update(aci_state_t *aci_state, uint8_t *speed_mode) {
 }
 
 void speed_mode_on_pipe_status(aci_state_t *aci_state, uint8_t *speed_mode) {
+	
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_DRIVE_SPEEDMODE_TX)) {
-		speed_mode_value[0] = *speed_mode;
-		speed_mode_send_update(aci_state, speed_mode_value);
+		
+		if(subscribed_sent == false) {
+			speed_mode_value[0] = *speed_mode;
+			
+			speed_mode_send_update(aci_state, speed_mode_value);
+			subscribed_sent = true;
+			*old_speed_mode = *speed_mode;	
+		}
+		
+	} else {
+		subscribed_sent = false;
 	}
 }
 

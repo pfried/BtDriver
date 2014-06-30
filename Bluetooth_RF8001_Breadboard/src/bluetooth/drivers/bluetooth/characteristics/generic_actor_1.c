@@ -45,10 +45,21 @@ void generic_actor_1_update(aci_state_t *aci_state, uint16_t *generic_actor_1) {
 }
 
 void generic_actor_1_on_pipe_status(aci_state_t *aci_state, uint16_t *generic_actor_1) {
+	
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_GENERIC_GENERICACTOR1_TX)) {
-		generic_actor_1_value[0] = *generic_actor_1;
-		generic_actor_1_value[1] = (*generic_actor_1 >> 8);
-		generic_actor_1_send_update(aci_state, generic_actor_1_value);
+		
+		if(subscribed_sent == false) {
+			generic_actor_1_value[0] = *generic_actor_1;
+			generic_actor_1_value[1] = (*generic_actor_1 >> 8);
+			
+			generic_actor_1_send_update(aci_state, generic_actor_1_value);
+			subscribed_sent = true;
+			*old_generic_actor_1 = *generic_actor_1;
+		}
+	} else {
+		subscribed_sent = false;
 	}
 }
 

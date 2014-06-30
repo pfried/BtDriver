@@ -45,9 +45,21 @@ void horn_update(aci_state_t *aci_state, uint8_t *horn) {
 }
 
 void horn_on_pipe_status(aci_state_t *aci_state, uint8_t *horn) {
+	
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_HORN_HORN_TX)) {
-		horn_value[0] = *horn;
-		horn_send_update(aci_state, horn_value);
+		
+		if(subscribed_sent == false) {
+			horn_value[0] = *horn;
+			
+			horn_send_update(aci_state, horn_value);
+			subscribed_sent = true;
+			*oldHorn = *horn;
+		}
+		
+	} else {
+		subscribed_sent = false;
 	}
 }
 

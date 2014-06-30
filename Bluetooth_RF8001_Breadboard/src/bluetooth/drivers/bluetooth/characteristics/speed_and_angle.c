@@ -59,13 +59,25 @@ void speed_and_angle_update(aci_state_t *aci_state, uint16_t *speed, uint16_t *a
 }
 
 void speed_and_angle_on_pipe_status(aci_state_t *aci_state, uint16_t *speed, uint16_t *angle) {
+	
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_DRIVE_SPEEDANDANGLE_TX)) {
-		speed_and_angle_value[0] = *speed;
-		speed_and_angle_value[1] = (*speed >> 8);
-		speed_and_angle_value[2] = *angle;
-		speed_and_angle_value[3] = (*angle >> 8);
 		
-		speed_and_angle_send_update(aci_state, speed_and_angle_value);		
+		if(subscribed_sent == false) {
+			speed_and_angle_value[0] = *speed;
+			speed_and_angle_value[1] = (*speed >> 8);
+			speed_and_angle_value[2] = *angle;
+			speed_and_angle_value[3] = (*angle >> 8);
+			
+			speed_and_angle_send_update(aci_state, speed_and_angle_value);
+			subscribed_sent = true;
+			*old_angle = *angle;
+			*old_speed = *speed;
+		}
+	
+	} else {
+		subscribed_sent = false;
 	}
 }
 void speed_and_angle_send_update(aci_state_t *aci_state, uint8_t speed_and_angle[PIPE_DRIVE_SPEEDANDANGLE_TX_MAX_SIZE]) {

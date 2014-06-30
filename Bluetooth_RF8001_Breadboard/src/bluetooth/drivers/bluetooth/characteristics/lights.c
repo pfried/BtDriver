@@ -45,9 +45,21 @@ void lights_update(aci_state_t *aci_state, uint8_t *lights) {
 }
 
 void lights_on_pipe_status(aci_state_t *aci_state, uint8_t *lights) {
+	
+	static bool subscribed_sent = false;
+	
 	if(lib_aci_is_pipe_available(aci_state, PIPE_LIGHTS_LIGHTS_TX)) {
-		lights_value[0] = *lights;
-		lights_send_update(aci_state, lights_value);
+		
+		if(subscribed_sent == false) {
+			lights_value[0] = *lights;
+			
+			lights_send_update(aci_state, lights_value);
+			subscribed_sent = true;
+			*oldLights = *lights;
+		}
+		
+	} else {
+		subscribed_sent = false;
 	}
 }
 
