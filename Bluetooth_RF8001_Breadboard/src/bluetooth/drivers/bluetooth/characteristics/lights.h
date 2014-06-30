@@ -11,9 +11,9 @@
 
 #define LIGHTS_LVL_THRESHOLD 1
 
-void lights_init(uint16_t *lights);
-void lights_on_pipe_status(aci_state_t *aci_state, uint16_t *lights);
-void lights_update(aci_state_t *aci_state, uint16_t *lights);
+void lights_init(uint8_t *lights);
+void lights_on_pipe_status(aci_state_t *aci_state, uint8_t *lights);
+void lights_update(aci_state_t *aci_state, uint8_t *lights);
 void lights_send_update(aci_state_t *aci_state, uint8_t lights[PIPE_LIGHTS_LIGHTS_TX_MAX_SIZE]);
 
 #endif /* LIGHTS_H_ */

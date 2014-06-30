@@ -10,13 +10,15 @@
 #include "../lib/lib_aci.h"
 #include "lights.h"
 
-static uint16_t *oldLights;
+static uint8_t lights_value[PIPE_LIGHTS_LIGHTS_TX_MAX_SIZE];
 
-void lights_init(uint16_t *lights) {
+static uint8_t *oldLights;
+
+void lights_init(uint8_t *lights) {
 	oldLights = lights;
 }
 
-void lights_update(aci_state_t *aci_state, uint16_t *lights) {
+void lights_update(aci_state_t *aci_state, uint8_t *lights) {
 	
 	uint16_t lights_difference = 0;
 	
@@ -30,11 +32,13 @@ void lights_update(aci_state_t *aci_state, uint16_t *lights) {
 	
 	if(lights_difference >= LIGHTS_LVL_THRESHOLD) {
 		
-		lib_aci_set_local_data(PIPE_LIGHTS_LIGHTS_TX, *lights, PIPE_LIGHTS_LIGHTS_TX_MAX_SIZE);
+		lights_value[0] = *lights;
+		
+		lib_aci_set_local_data(PIPE_LIGHTS_LIGHTS_TX, lights_value, PIPE_LIGHTS_LIGHTS_TX_MAX_SIZE);
 		
 		if(lib_aci_is_pipe_available(aci_state, PIPE_LIGHTS_LIGHTS_TX)) {
 			if (aci_state->data_credit_available > 0) {
-				lights_send_update(aci_state, *lights);
+				lights_send_update(aci_state, lights_value);
 			}
 		}
 		
@@ -42,9 +46,10 @@ void lights_update(aci_state_t *aci_state, uint16_t *lights) {
 	}
 }
 
-void lights_on_pipe_status(aci_state_t *aci_state, uint16_t *lights) {
+void lights_on_pipe_status(aci_state_t *aci_state, uint8_t *lights) {
 	if(lib_aci_is_pipe_available(aci_state, PIPE_LIGHTS_LIGHTS_TX)) {
-		lights_send_update(aci_state, *lights);
+		lights_value[0] = *lights;
+		lights_send_update(aci_state, lights_value);
 	}
 }
 

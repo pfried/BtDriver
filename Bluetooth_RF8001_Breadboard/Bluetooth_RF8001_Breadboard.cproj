@@ -361,6 +361,12 @@
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_us_rear.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\horn.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\horn.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\lights.c">
       <SubType>compile</SubType>
     </Compile>
