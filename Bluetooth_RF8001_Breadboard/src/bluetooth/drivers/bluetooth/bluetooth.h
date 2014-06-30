@@ -43,6 +43,8 @@
 #define SCK    IOPORT_CREATE_PIN(PORTC, 7)
 #define SS     IOPORT_CREATE_PIN(PORTC, 4)
 
+#define TEMPERATURE_TIMER_RESOLUTION 1
+
 /*! \brief Bluetooth driver struct
  *
  */
