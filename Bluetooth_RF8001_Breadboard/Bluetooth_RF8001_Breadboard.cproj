@@ -337,6 +337,12 @@
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\brightness.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\characteristic_util.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\characteristic_util.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_front.c">
       <SubType>compile</SubType>
     </Compile>

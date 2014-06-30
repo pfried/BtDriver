@@ -9,6 +9,9 @@
 #ifndef BRIGHTNESS_H_
 #define BRIGHTNESS_H_
 
+#include "../lib/services.h"
+#include "../lib/lib_aci.h"
+
 #define BRIGHTNESS_LVL_CHANGE_THRESHOLD 1
 
 void brightness_init(uint16_t *brightness);

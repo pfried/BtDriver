@@ -9,6 +9,9 @@
 #ifndef DISTANCE_IR_FRONT_H_
 #define DISTANCE_IR_FRONT_H_
 
+#include "../lib/lib_aci.h"
+#include "../lib/services.h"
+
 #define DISTANCE_IR_FRONT_LVL_THRESHOLD 1
 
 void distance_ir_front_init(uint16_t *distance);

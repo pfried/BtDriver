@@ -9,6 +9,9 @@
 #ifndef BATTERY_H_
 #define BATTERY_H_
 
+#include "../lib/services.h"
+#include "../lib/lib_aci.h"
+
 #define BATTERY_LVL_THRESHOLD 1
 
 void battery_init(uint16_t *battery);

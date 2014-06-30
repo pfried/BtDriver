@@ -6,8 +6,6 @@
  * @brief Implementation of the Infrared Distance Sensor Front characteristic
  */
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "distance_ir_front.h"
 
 static uint16_t *oldDistance;

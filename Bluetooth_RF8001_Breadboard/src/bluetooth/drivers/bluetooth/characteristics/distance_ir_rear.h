@@ -9,6 +9,9 @@
 #ifndef DISTANCE_IR_REAR_H_
 #define DISTANCE_IR_REAR_H_
 
+#include "../lib/services.h"
+#include "../lib/lib_aci.h"
+
 #define DISTANCE_IR_REAR_LVL_THRESHOLD 1
 
 void distance_ir_rear_init(uint16_t *distance);

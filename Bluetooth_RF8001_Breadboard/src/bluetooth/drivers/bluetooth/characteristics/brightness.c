@@ -6,8 +6,6 @@
  * @brief Implementation of the brightness characteristic
  */
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "brightness.h"
 
 static uint16_t *oldBrightness;

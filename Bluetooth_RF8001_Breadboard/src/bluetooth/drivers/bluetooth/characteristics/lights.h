@@ -9,6 +9,10 @@
 #ifndef LIGHTS_H_
 #define LIGHTS_H_
 
+#include "../lib/services.h"
+#include "../lib/lib_aci.h"
+#include "characteristic_util.h"
+
 #define LIGHTS_LVL_THRESHOLD 1
 
 void lights_init(uint8_t *lights);

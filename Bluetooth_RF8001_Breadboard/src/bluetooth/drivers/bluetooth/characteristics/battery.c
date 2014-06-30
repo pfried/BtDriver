@@ -6,8 +6,6 @@
  * @brief Implementation of the battery characteristic
  */
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "battery.h"
 
 static uint16_t *oldBattery;

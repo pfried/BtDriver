@@ -6,8 +6,6 @@
  * @brief Implementation of the Ultrasonic Distance Sensor Rear characteristic
  */ 
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "distance_us_rear.h"
 
 static uint16_t *oldDistance;

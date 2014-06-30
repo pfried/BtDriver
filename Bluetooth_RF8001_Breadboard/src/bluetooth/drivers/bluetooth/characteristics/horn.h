@@ -9,6 +9,9 @@
 #ifndef HORN_H_
 #define HORN_H_
 
+#include "../lib/services.h"
+#include "../lib/lib_aci.h"
+
 #define HORN_LVL_THRESHOLD 1
 
 void horn_init(uint8_t *horn);

@@ -6,8 +6,6 @@
  * @brief Implementation of the lights characteristic
  */
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "lights.h"
 
 static uint8_t lights_value[PIPE_LIGHTS_LIGHTS_TX_MAX_SIZE];

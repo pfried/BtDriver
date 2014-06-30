@@ -6,8 +6,6 @@
  * @brief Implementation of the horn characteristic
  */
 
-#include "../lib/services.h"
-#include "../lib/lib_aci.h"
 #include "horn.h"
 
 static uint8_t horn_value[PIPE_HORN_HORN_TX_MAX_SIZE];
