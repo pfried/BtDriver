@@ -26,8 +26,6 @@ void distance_us_front_update(aci_state_t *aci_state, uint16_t *distance) {
 		} else {
 			distance_difference = *distance - *oldDistance;
 		}
-	} else {
-		distance_difference = 0;
 	}
 	
 	if(distance_difference >= DISTANCE_US_FRONT_LVL_THRESHOLD) {

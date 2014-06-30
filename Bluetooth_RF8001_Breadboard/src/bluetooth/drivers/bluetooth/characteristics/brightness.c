@@ -27,8 +27,6 @@ brightness_update(aci_state_t *aci_state, uint16_t *newBrightness) {
 		} else {
 			brightness_difference = *newBrightness - *oldBrightness;
 		}
-	} else {
-		brightness_difference = 0;
 	}
 	
 	if(brightness_difference >= BRIGHTNESS_LVL_CHANGE_THRESHOLD) {
