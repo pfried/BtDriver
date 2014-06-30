@@ -1,8 +1,10 @@
-/*
- * iascar.c
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 22.05.2014 11:56:59
- *  Author: Friedrich Maeckle
+ * @brief Implementation of the Blueooth Service for the IAS teamwork car.
+ * @details  Provides setters and getters for the properties of the car. The car model is used to sync the data with the bluetooth driver. Provide a name to the setup function and the device will shop up in Bluetooth with this name.
  */
 
 #include "btcar.h"
@@ -31,6 +33,9 @@ static void initCarModel(void) {
 	bluetooth_car.name = "defaultCar";
 }
 
+/**
+ * @param name max 10 Characters
+ */
 void carBluetoothSetup(char *name) {
 	
 	// Setup LED

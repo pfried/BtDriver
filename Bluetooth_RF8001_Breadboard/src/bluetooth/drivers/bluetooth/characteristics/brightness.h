@@ -1,10 +1,10 @@
-/*
- * brightness.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 12:56:10
- *  Author: fried_000
- */ 
-
+ * @brief Header of the brightness characteristic
+ */
 
 #ifndef BRIGHTNESS_H_
 #define BRIGHTNESS_H_

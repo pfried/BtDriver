@@ -1,8 +1,9 @@
-/*
- * distance_ir_front.c
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 18:22:36
- *  Author: fried_000
+ * @brief Implementation of the Infrared Distance Sensor Front characteristic
  */
 
 #include "../lib/services.h"

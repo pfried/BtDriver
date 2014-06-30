@@ -1,9 +1,10 @@
-/*
- * distance_ir_front.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 18:21:46
- *  Author: fried_000
- */ 
+ * @brief Header of the Infrared Distance Sensor Front characteristic
+ */
 
 #ifndef DISTANCE_IR_FRONT_H_
 #define DISTANCE_IR_FRONT_H_

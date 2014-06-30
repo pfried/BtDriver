@@ -1,9 +1,10 @@
-/*
- * distance_ir_rear.c
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 18:22:48
- *  Author: fried_000
- */ 
+ * @brief Implementation of the Infrared Distance Sensor Rear characteristic
+ */
 
 #include "../lib/services.h"
 #include "../lib/lib_aci.h"

@@ -1,8 +1,9 @@
-/*
- * brightness.c
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 13:08:12
- *  Author: fried_000
+ * @brief Implementation of the brightness characteristic
  */
 
 #include "../lib/services.h"

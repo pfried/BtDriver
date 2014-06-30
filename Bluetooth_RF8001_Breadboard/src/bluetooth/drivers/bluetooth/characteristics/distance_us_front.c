@@ -1,9 +1,10 @@
-/*
- * distance_us_front.c
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 17:01:26
- *  Author: fried_000
- */ 
+ * @brief Implementation of the Ultrasonic Distance Sensor Front characteristic
+ */
 
 #include "../lib/services.h"
 #include "../lib/lib_aci.h"

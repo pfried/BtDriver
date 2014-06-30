@@ -1,9 +1,10 @@
-/*
- * distance_ir_rear.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 18:22:00
- *  Author: fried_000
- */ 
+ * @brief Header of the Infrared Distance Sensor Rear characteristic
+ */
 
 #ifndef DISTANCE_IR_REAR_H_
 #define DISTANCE_IR_REAR_H_

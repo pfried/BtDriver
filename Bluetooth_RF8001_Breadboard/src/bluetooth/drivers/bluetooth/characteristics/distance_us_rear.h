@@ -1,9 +1,10 @@
-/*
- * distance_us_rear.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 18:14:48
- *  Author: fried_000
- */ 
+ * @brief Header of the Ultrasonic Distance Sensor Rear characteristic
+ */  
 
 #ifndef DISTANCE_US_REAR_H_
 #define DISTANCE_US_REAR_H_

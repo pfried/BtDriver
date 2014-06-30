@@ -1,9 +1,10 @@
-/*
- * btcar.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 22.05.2014 11:56:49
- *  Author: Friedrich Maeckle
- */ 
+ * @brief Header of the Bluetooth Service
+ */
 
 #include <stdint.h>
 #include "../drivers/bluetooth/bluetooth.h"

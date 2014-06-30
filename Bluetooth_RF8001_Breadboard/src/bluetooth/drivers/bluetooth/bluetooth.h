@@ -1,10 +1,10 @@
-/*
- * bluetooth.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 21.05.2014 16:57:00
- *  Author: Friedrich Maeckle
+ * @brief Header of the Bluetooth Driver
  */ 
-
 
 #ifndef BLUETOOTH_H_
 #define BLUETOOTH_H_

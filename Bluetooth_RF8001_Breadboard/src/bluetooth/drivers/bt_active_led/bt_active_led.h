@@ -1,9 +1,10 @@
-/*
- * bt_active_led.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 24.06.2014 08:57:42
- *  Author: fried_000
- */ 
+ * @brief Header of the Bluetooth Active LED
+ */
 
 #include <ioport.h>
 

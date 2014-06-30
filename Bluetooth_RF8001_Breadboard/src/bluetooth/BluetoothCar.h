@@ -1,8 +1,9 @@
-/*
- * BluetoothCar.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 26.06.2014 10:04:13
- *  Author: fried_000
+ * @brief Header for the Bluetooth Service. Include this file to include all other dependencies. Folder structure must be kept.
  */ 
 
 

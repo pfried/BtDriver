@@ -1,9 +1,10 @@
-/*
- * battery.h
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 18:22:17
- *  Author: fried_000
- */ 
+ * @brief Header of the battery characteristic
+ */
 
 #ifndef BATTERY_H_
 #define BATTERY_H_

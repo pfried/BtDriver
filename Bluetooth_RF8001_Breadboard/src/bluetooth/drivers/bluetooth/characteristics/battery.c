@@ -1,9 +1,10 @@
-/*
- * battery.c
+/**
+ * @author Friedrich Mäckle
+ * @date 2014
+ * @copyright IAS, University of Stuttgart, Germany
  *
- * Created: 29.06.2014 18:22:26
- *  Author: fried_000
- */ 
+ * @brief Implementation of the battery characteristic
+ */
 
 #include "../lib/services.h"
 #include "../lib/lib_aci.h"
