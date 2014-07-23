@@ -50,6 +50,8 @@ static bool timing_change_done = false;
 static bluetooth_car_t *car;
 // To send only new values we save the last state of the car
 static bluetooth_car_t oldcar;
+// Bluetooth transmission counter
+static int bt_counter = 0;
 
 uint8_t pipes_open_bitmap_old[PIPES_ARRAY_SIZE];
 
@@ -154,10 +156,10 @@ void detachInterrupt(port_pin_t pin) {
 	#endif
 }
 
-static bool temperature_counter_flag = false;
+static bool bluetooth_process_flag = false;
 
-void temperature_ovf_interrupt_callback(void) {
-	temperature_counter_flag = true;
+void bluetooth_ovf_interrupt_callback(void) {
+	bluetooth_process_flag = true;
 	tc45_clear_overflow(&TCC4);
 }
 
@@ -228,12 +230,30 @@ void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluet
 	lib_aci_init(&aci_state,false);
 	
 	// Enable Timer
+	
+	/**
+	* How often do we transmit sensor values?
+	* (1/((Sysclock / prescaler) / 65535) * (Number of pipes + 1)) s
+	* As we use a 16bit timer's overflow we basically count to 65,535
+	* The sysclock is 32 000 000 Hz
+	* prescaler is 4
+	* Number of pipes is 22
+	* (1/((32 000 000 / 4) / 65 535) * (22 +1))s
+	* this results in 0,1883s or in other words we transmit a value each 8,81ms (must be > 7,5ms connection interval configured in nRFGo Studio).
+	* which means that each value is transmitted at a maximum rate of 0,19s, so it is transmitted ~5 times per second or ~5Hz.
+	*
+	* NRF8001
+	* On 7,5ms default interval the throughput is at 21000 Bit/s (1s / 7,5ms) packages/s * 20 bytes/package) * 8 bit/byte = 21333 bit/s
+	* Per connection we can send 1-2 packages (each package contains max 20 bytes)
+	* These are always max values, the real values will be lower.
+	*/
+		
 	#if XMEGA_E
 	tc45_enable(&TCC4);
 	tc45_set_wgm(&TCC4, TC45_WG_NORMAL);
-	tc45_set_overflow_interrupt_callback(&TCC4, temperature_ovf_interrupt_callback);
+	tc45_set_overflow_interrupt_callback(&TCC4, bluetooth_ovf_interrupt_callback);
 	tc45_set_overflow_interrupt_level(&TCC4, TC45_INT_LVL_LO);
-	tc45_write_clock_source(&TCC4, TC45_CLKSEL_DIV1024_gc);
+	tc45_write_clock_source(&TCC4, TC45_CLKSEL_DIV4_gc);
 	#endif
 }
 
@@ -509,36 +529,108 @@ void bluetooth_process(void) {
 		}
 	}
 	
-	// Do the transmission of the cars values
+	
 	bluetooth_values_process();
 	
 }
 
+// Do the transmission of the cars values
 void bluetooth_values_process(void) {
 	
 	// We are in connected mode if timing is done
 	if(timing_change_done == true) {
 		
-		// Send the new values to the characteristics, they decide what to do
-		brightness_update(&aci_state, &car->brightness);
-		distance_us_front_update(&aci_state, &car->distance_us_front);
-		distance_us_rear_update(&aci_state, &car->distance_us_rear);
-		distance_ir_front_update(&aci_state, &car->distance_ir_front);
-		distance_ir_rear_update(&aci_state, &car->distance_ir_rear);
-		battery_update(&aci_state, &car->battery);
-		horn_update(&aci_state, &car->horn);
-		lights_update(&aci_state, &car->lights);
-		speed_mode_update(&aci_state, &car->speedMode);
-		sensor_servo_update(&aci_state, &car->sensorServo);
-		speed_and_angle_update(&aci_state, &car->speed, &car->direction);
-		generic_actor_1_update(&aci_state, &car->generic_actor_1);
-		generic_actor_2_update(&aci_state, &car->generic_actor_2);
-		temperature_update(&aci_state, &car->temperature);
-		
-		// Request a temperature value timer based, the timer sets the flag		
-		if(temperature_counter_flag == true) {
-			lib_aci_get_temperature();
-			temperature_counter_flag = false;
+		// Check if the interrupt occured
+		if(bluetooth_process_flag == true) {
+			// Counter loops through all the bluetooth properties
+			switch(bt_counter) {
+				
+				// The characteristics themselves decide whether to transmit or not (threshold possible)
+				
+				case PIPE_BRIGHTNESS_BRIGHTNESS_TX:
+				{
+					brightness_update(&aci_state, &car->brightness);
+					break;
+				}
+				case PIPE_DISTANCE_DISTANCEIRFRONT_TX:
+				{
+					distance_ir_front_update(&aci_state, &car->distance_ir_front);
+					break;
+				}
+				case PIPE_DISTANCE_DISTANCEIRREAR_TX:
+				{
+					distance_ir_rear_update(&aci_state, &car->distance_ir_rear);
+					break;
+				}
+				case PIPE_DISTANCE_DISTANCEUSFRONT_TX:
+				{
+					distance_us_front_update(&aci_state, &car->distance_us_front);
+					break;
+				}
+				case PIPE_DISTANCE_DISTANCEUSREAR_TX:
+				{
+					distance_us_rear_update(&aci_state, &car->distance_us_rear);
+					break;
+				}
+				case PIPE_BATTERYLEVEL_BATTERYLEVEL_TX:
+				{
+					battery_update(&aci_state, &car->battery);
+					break;
+				}
+				case PIPE_HORN_HORN_TX:
+				{
+					horn_update(&aci_state, &car->horn);
+					break;
+				}
+				case PIPE_LIGHTS_LIGHTS_TX:
+				{
+					lights_update(&aci_state, &car->lights);
+					break;
+				}
+				case PIPE_DRIVE_SPEEDMODE_TX:
+				{
+					speed_mode_update(&aci_state, &car->speedMode);
+					break;
+				}
+				case PIPE_DISTANCE_SENSORSERVO_TX:
+				{
+					sensor_servo_update(&aci_state, &car->sensorServo);
+					break;
+				}
+				case PIPE_DRIVE_SPEEDANDANGLE_TX:
+				{
+					speed_and_angle_update(&aci_state, &car->speed, &car->direction);
+					break;
+				}
+				case PIPE_GENERIC_GENERICACTOR1_TX:
+				{
+					generic_actor_1_update(&aci_state, &car->generic_actor_1);
+					break;
+				}
+				case PIPE_GENERIC_GENERICACTOR2_TX:
+				{
+					generic_actor_2_update(&aci_state, &car->generic_actor_2);
+					break;
+				}
+				case PIPE_THERMOMETER_TEMPERATURE_TX:
+				{
+					temperature_update(&aci_state, &car->temperature);
+					break;
+				}
+				
+			}
+			
+			// Increment the counter
+			bt_counter++;
+					
+			// Set counter to 0 again
+			if(bt_counter > (NUMBER_OF_PIPES + 1)) {
+				// Add the reading of the temperature sensor here
+				lib_aci_get_temperature();
+				bt_counter = 0;
+			}
+					
+			bluetooth_process_flag = false;
 		}
 	}
 }
