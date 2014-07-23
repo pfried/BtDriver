@@ -58,9 +58,21 @@ uint8_t pipes_open_bitmap_old[PIPES_ARRAY_SIZE];
 // Interrupt handler
 static bt_callback_t bt_callback;
 
+static bool bluetooth_process_flag = false;
+
+// Set the timer flag to true, so processing will take place
+void bluetooth_ovf_interrupt_callback(void) {
+	bluetooth_process_flag = true;
+	#if XMEGA_E
+	tc45_clear_overflow(&TCC4);
+	#endif
+}
+
 // Interrupt Vector PORT
 // In XMegaE all Pins have a flag in the INTFLAGS register, in XMegaA there is one flag for each interrupt
 #if XMEGA_E5
+
+// Pin Interrupt
 ISR(PORTC_INT_vect) {
 	if(bt_callback) {
 		bt_callback();
@@ -77,6 +89,13 @@ ISR(PORTC_INT0_vect) {
 		// Clear the Interrupt, no idea why it doesnt get cleared in ISR
 		PORTC.INTFLAGS |= PORT_INT0IF_bm;
 	}
+}
+
+// TC Interrupt
+ISR(TCD1_OVF_vect) {
+	bluetooth_ovf_interrupt_callback();
+	// Reset OVF flag
+	//TCD1.INTFLAGS |= TC4_OVFIF_bm;
 }
 #endif
 
@@ -156,14 +175,6 @@ void detachInterrupt(port_pin_t pin) {
 	#endif
 }
 
-static bool bluetooth_process_flag = false;
-
-void bluetooth_ovf_interrupt_callback(void) {
-	bluetooth_process_flag = true;
-	tc45_clear_overflow(&TCC4);
-}
-
-
 void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluetooth_car) {
 	
 	car = bluetooth_car;
@@ -220,17 +231,7 @@ void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluet
 	PORTC.INTCTRL |= PORT_INT0LVL_LO_gc;
 	#endif
 	
-	// Enable Low Level Interrupts on PMIC
-	PMIC.CTRL |= PMIC_HILVLEN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm;
-	
-	/** We reset the nRF8001 here by toggling the RESET line connected to the nRF8001
-	*  and initialize the data structures required to setup the nRF8001
-	*/
-	//The second parameter is for turning debug printing on for the ACI Commands and Events so they be printed on the Serial
-	lib_aci_init(&aci_state,false);
-	
 	// Enable Timer
-	
 	/**
 	* How often do we transmit sensor values?
 	* (1/((Sysclock / prescaler) / 65535) * (Number of pipes + 1)) s
@@ -255,6 +256,27 @@ void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluet
 	tc45_set_overflow_interrupt_level(&TCC4, TC45_INT_LVL_LO);
 	tc45_write_clock_source(&TCC4, TC45_CLKSEL_DIV4_gc);
 	#endif
+	
+	#if XMEGA_A
+	// Prescaler 4
+	TCD1.CTRLA = TC45_CLKSEL_DIV4_gc;
+	// Timer Normal mode
+	TCD1.CTRLB = TC45_WGMODE_NORMAL_gc;
+	// Priority low
+	TCD1.INTCTRLA = TC45_OVFINTLVL_LO_gc;
+	// Top
+	TCD1.PER = 62000;
+	#endif
+	
+	// Enable Low Level Interrupts on PMIC
+	PMIC.CTRL |= PMIC_HILVLEN_bm | PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm;
+	
+	/** We reset the nRF8001 here by toggling the RESET line connected to the nRF8001
+	*  and initialize the data structures required to setup the nRF8001
+	*/
+	//The second parameter is for turning debug printing on for the ACI Commands and Events so they be printed on the Serial
+	lib_aci_init(&aci_state,false);
+
 }
 
 void bluetooth_process(void) {
@@ -396,7 +418,9 @@ void bluetooth_process(void) {
 					Request a change to the link timing as set in the GAP -> Preferred Peripheral Connection Parameters
 					Change the setting in nRFgo studio -> nRF8001 configuration -> GAP Settings and recompile the xml file.
 					*/
-					lib_aci_change_timing_GAP_PPCP();
+					// TODO Find out why it doesnt work on the XMEGAA
+					//lib_aci_change_timing_GAP_PPCP();
+					timing_change_done = true;
 				}
 				else {
 					// If someone subscribes we want to send a first value to the subscriptor
@@ -608,7 +632,7 @@ void bluetooth_values_process(void) {
 					break;
 				}
 				case PIPE_GENERIC_GENERICACTOR2_TX:
-				{
+				{ 
 					generic_actor_2_update(&aci_state, &car->generic_actor_2);
 					break;
 				}
