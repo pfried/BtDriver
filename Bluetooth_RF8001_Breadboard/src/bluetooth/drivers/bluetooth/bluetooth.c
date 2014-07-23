@@ -519,8 +519,6 @@ void bluetooth_values_process(void) {
 	// We are in connected mode if timing is done
 	if(timing_change_done == true) {
 		
-
-		
 		// Send the new values to the characteristics, they decide what to do
 		brightness_update(&aci_state, &car->brightness);
 		distance_us_front_update(&aci_state, &car->distance_us_front);
