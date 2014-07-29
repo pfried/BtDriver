@@ -45,6 +45,7 @@ static hal_aci_data_t aci_cmd;
 
 static bool radio_ack_pending  = false;
 static bool timing_change_done = false;
+static bool temperature_request_pending = false;
 
 // The car model with the current values
 static bluetooth_car_t *car;
@@ -92,7 +93,7 @@ ISR(PORTC_INT0_vect) {
 }
 
 // TC Interrupt
-ISR(TCD1_OVF_vect) {
+ISR(TCF1_OVF_vect) {
 	bluetooth_ovf_interrupt_callback();
 	// Reset OVF flag
 	//TCD1.INTFLAGS |= TC4_OVFIF_bm;
@@ -259,13 +260,13 @@ void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluet
 	
 	#if XMEGA_A
 	// Prescaler 4
-	TCD1.CTRLA = TC45_CLKSEL_DIV4_gc;
+	TCF1.CTRLA = TC_CLKSEL_DIV4_gc;
 	// Timer Normal mode
-	TCD1.CTRLB = TC45_WGMODE_NORMAL_gc;
+	TCF1.CTRLB = TC_WGMODE_NORMAL_gc;
 	// Priority low
-	TCD1.INTCTRLA = TC45_OVFINTLVL_LO_gc;
+	TCF1.INTCTRLA = TC_OVFINTLVL_LO_gc;
 	// Top
-	TCD1.PER = 62000;
+	TCF1.PER = UINT16_MAX;
 	#endif
 	
 	// Enable Low Level Interrupts on PMIC
@@ -494,6 +495,7 @@ void bluetooth_process(void) {
 						case ACI_CMD_GET_TEMPERATURE:
 						{
 							car->temperature = aci_evt->params.cmd_rsp.params.get_temperature.temperature_value;
+							temperature_request_pending = false;
 							break;
 						}
 						
@@ -546,8 +548,6 @@ void bluetooth_process(void) {
 			generic_actor_1_init(&oldcar.generic_actor_1);
 			generic_actor_2_init(&oldcar.generic_actor_2);
 			temperature_init(&oldcar.temperature);
-			
-			
 			
 			setup_required = false;
 		}
@@ -650,7 +650,11 @@ void bluetooth_values_process(void) {
 			// Set counter to 0 again
 			if(bt_counter > (NUMBER_OF_PIPES + 1)) {
 				// Add the reading of the temperature sensor here
-				lib_aci_get_temperature();
+				if(temperature_request_pending == false) {
+					lib_aci_get_temperature();
+					temperature_request_pending = true;
+				}
+				
 				bt_counter = 0;
 			}
 					
