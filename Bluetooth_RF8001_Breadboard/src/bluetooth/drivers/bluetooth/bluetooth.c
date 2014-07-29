@@ -351,8 +351,8 @@ void bluetooth_process(void) {
 					// Speed and Angle
 					case PIPE_DRIVE_SPEEDANDANGLE_RX:
 					{
-						car->speed = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[1] << 8) | aci_evt->params.data_received.rx_data.aci_data[0];
-						car->direction = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[3] << 8) | aci_evt->params.data_received.rx_data.aci_data[2];
+						car->direction = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[1] << 8) | aci_evt->params.data_received.rx_data.aci_data[0];
+						car->speed     = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[3] << 8) | aci_evt->params.data_received.rx_data.aci_data[2];
 						break;
 					}
 					
