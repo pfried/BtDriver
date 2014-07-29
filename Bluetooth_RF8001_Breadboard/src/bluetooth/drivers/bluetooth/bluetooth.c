@@ -351,8 +351,8 @@ void bluetooth_process(void) {
 					// Speed and Angle
 					case PIPE_DRIVE_SPEEDANDANGLE_RX:
 					{
-						car->speed = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
-						car->direction = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[2] << 8) | aci_evt->params.data_received.rx_data.aci_data[3];
+						car->speed = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[1] << 8) | aci_evt->params.data_received.rx_data.aci_data[0];
+						car->direction = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[3] << 8) | aci_evt->params.data_received.rx_data.aci_data[2];
 						break;
 					}
 					
@@ -366,7 +366,7 @@ void bluetooth_process(void) {
 					// Sensor Sevo
 					case PIPE_DISTANCE_SENSORSERVO_RX:
 					{
-						car->sensorServo = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
+						car->sensorServo = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[1] << 8) | aci_evt->params.data_received.rx_data.aci_data[0];
 						break;
 					}
 					// The Horn, möp möp
@@ -384,12 +384,12 @@ void bluetooth_process(void) {
 					// The Generic Actors
 					case PIPE_GENERIC_GENERICACTOR1_RX_ACK_AUTO:
 					{
-						car->generic_actor_1 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
+						car->generic_actor_1 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[1] << 8) | aci_evt->params.data_received.rx_data.aci_data[0];
 						break;
 					}
 					case PIPE_GENERIC_GENERICACTOR2_RX_ACK_AUTO:
 					{
-						car->generic_actor_2 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[0] << 8) | aci_evt->params.data_received.rx_data.aci_data[1];
+						car->generic_actor_2 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[1] << 8) | aci_evt->params.data_received.rx_data.aci_data[0];
 						break;
 					}
 					
