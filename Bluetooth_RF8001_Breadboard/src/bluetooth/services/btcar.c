@@ -15,8 +15,8 @@ bluetooth_car_t bluetooth_car;
 
 // A model to synchronize Bluetooth and Car, initialize Values to 0;
 static void initCarModel(void) {
-	bluetooth_car.speed = 0x0000;
-	bluetooth_car.direction = 0x0000;
+	bluetooth_car.speed = 0x02ee;
+	bluetooth_car.direction = 0x02ee;
 	bluetooth_car.speedMode = 0x00;
 	bluetooth_car.battery = 0x0000;
 	bluetooth_car.brightness = 0x0000;
@@ -25,7 +25,7 @@ static void initCarModel(void) {
 	bluetooth_car.distance_us_front = 0x0000;
 	bluetooth_car.distance_us_rear = 0x0000;
 	bluetooth_car.temperature = 0x0000;
-	bluetooth_car.sensorServo = 0x00;
+	bluetooth_car.sensorServo = 0x02ee;
 	bluetooth_car.horn = 0x00;
 	bluetooth_car.lights = 0x00;
 	bluetooth_car.generic_actor_1 = 0x0000;

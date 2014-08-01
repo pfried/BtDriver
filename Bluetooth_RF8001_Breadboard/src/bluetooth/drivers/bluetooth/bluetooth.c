@@ -206,7 +206,7 @@ void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluet
 	aci_state.aci_pins.active_pin             = UNUSED;
 	aci_state.aci_pins.optional_chip_sel_pin  = UNUSED;
 
-	aci_state.aci_pins.interface_is_interrupt = true;
+	aci_state.aci_pins.interface_is_interrupt = false;
 	aci_state.aci_pins.interrupt_number       = bluetooth_config->rdyn_pin;
 	
 	// Interrupt Config
