@@ -4,14 +4,14 @@
     <SetupId>0</SetupId>
     <Device>nRF8001_Dx</Device>
     <Service Type="local" PrimaryService="true">
-        <Name>Brightness</Name>
-        <Uuid>0050</Uuid>
+        <Name>Sensors</Name>
+        <Uuid>0010</Uuid>
         <Characteristic>
-            <Name>Brightness</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0051</Uuid>
-            <DefaultValue>0</DefaultValue>
+            <Name>Sensors</Name>
+            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0011</Uuid>
+            <DefaultValue>000000000000</DefaultValue>
             <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
+            <MaxDataLength>6</MaxDataLength>
             <AttributeLenType>1</AttributeLenType>
             <ForceOpen>false</ForceOpen>
             <Properties>
@@ -32,13 +32,13 @@
     </Service>
     <Service Type="local" PrimaryService="true">
         <Name>Distance</Name>
-        <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0040</Uuid>
+        <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0030</Uuid>
         <Characteristic>
-            <Name>DistanceIRFront</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0043</Uuid>
-            <DefaultValue>0000</DefaultValue>
+            <Name>Distance</Name>
+            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0031</Uuid>
+            <DefaultValue>0000000000000000</DefaultValue>
             <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
+            <MaxDataLength>8</MaxDataLength>
             <AttributeLenType>1</AttributeLenType>
             <ForceOpen>false</ForceOpen>
             <Properties>
@@ -54,110 +54,18 @@
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Notify>60000</Notify>
-            </PeriodForProperties>
-        </Characteristic>
-        <Characteristic>
-            <Name>DistanceIRRear</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0044</Uuid>
-            <DefaultValue>0000</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <Notify>60000</Notify>
-            </PeriodForProperties>
-        </Characteristic>
-        <Characteristic>
-            <Name>DistanceUSFront</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0041</Uuid>
-            <DefaultValue>00</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <Notify>60000</Notify>
-            </PeriodForProperties>
-        </Characteristic>
-        <Characteristic>
-            <Name>DistanceUSRear</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0042</Uuid>
-            <DefaultValue>0000</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <Notify>60000</Notify>
-            </PeriodForProperties>
-        </Characteristic>
-        <Characteristic>
-            <Name>SensorServo</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0045</Uuid>
-            <DefaultValue>0000</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>true</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <WriteWithoutResponse>60000</WriteWithoutResponse>
             </PeriodForProperties>
         </Characteristic>
     </Service>
     <Service Type="local" PrimaryService="true">
-        <Name>Lights</Name>
+        <Name>Actors</Name>
         <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0020</Uuid>
         <Characteristic>
-            <Name>Lights</Name>
+            <Name>Actors</Name>
             <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0021</Uuid>
-            <DefaultValue>00</DefaultValue>
+            <DefaultValue>000000000000</DefaultValue>
             <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>1</MaxDataLength>
+            <MaxDataLength>6</MaxDataLength>
             <AttributeLenType>1</AttributeLenType>
             <ForceOpen>false</ForceOpen>
             <Properties>
@@ -173,33 +81,6 @@
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <PeriodForProperties>
                 <Write>60000</Write>
-            </PeriodForProperties>
-        </Characteristic>
-    </Service>
-    <Service Type="local" PrimaryService="true">
-        <Name>Horn</Name>
-        <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0010</Uuid>
-        <Characteristic>
-            <Name>Horn</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0011</Uuid>
-            <DefaultValue>00</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>1</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>true</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <WriteWithoutResponse>60000</WriteWithoutResponse>
             </PeriodForProperties>
         </Characteristic>
     </Service>
@@ -209,9 +90,9 @@
         <Characteristic>
             <Name>SpeedAndAngle</Name>
             <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0001</Uuid>
-            <DefaultValue>00000000</DefaultValue>
+            <DefaultValue>000000000000</DefaultValue>
             <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>4</MaxDataLength>
+            <MaxDataLength>6</MaxDataLength>
             <AttributeLenType>1</AttributeLenType>
             <ForceOpen>false</ForceOpen>
             <Properties>
@@ -228,131 +109,6 @@
             <PeriodForProperties>
                 <WriteWithoutResponse>60000</WriteWithoutResponse>
             </PeriodForProperties>
-        </Characteristic>
-        <Characteristic>
-            <Name>SpeedMode</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0002</Uuid>
-            <DefaultValue>00</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>1</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>true</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>true</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="4" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <Write>60000</Write>
-            </PeriodForProperties>
-        </Characteristic>
-    </Service>
-    <Service Type="local" PrimaryService="true">
-        <Name>BatteryLevel</Name>
-        <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0030</Uuid>
-        <Characteristic>
-            <Name>BatteryLevel</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0031</Uuid>
-            <DefaultValue>0000</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="6" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <Notify>60000</Notify>
-            </PeriodForProperties>
-        </Characteristic>
-    </Service>
-    <Service Type="local" PrimaryService="true">
-        <Name>Generic</Name>
-        <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0070</Uuid>
-        <Characteristic>
-            <Name>GenericActor1</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0071</Uuid>
-            <DefaultValue>0000</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>true</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>true</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <Write>60000</Write>
-            </PeriodForProperties>
-        </Characteristic>
-        <Characteristic>
-            <Name>GenericActor2</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0072</Uuid>
-            <DefaultValue>0000</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>true</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>true</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties>
-                <Write>60000</Write>
-            </PeriodForProperties>
-        </Characteristic>
-    </Service>
-    <Service Type="local" PrimaryService="true">
-        <Name>Thermometer</Name>
-        <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0090</Uuid>
-        <Characteristic>
-            <Name>Temperature</Name>
-            <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0091</Uuid>
-            <DefaultValue>0000</DefaultValue>
-            <UsePresentationFormat>0</UsePresentationFormat>
-            <MaxDataLength>2</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>true</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>0</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties/>
         </Characteristic>
     </Service>
     <Gapsettings>
