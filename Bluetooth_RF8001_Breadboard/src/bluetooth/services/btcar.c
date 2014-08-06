@@ -61,19 +61,40 @@ uint16_t bluetoothGetSpeed(void) {
 	return bluetooth_car.speed;
 }
 
+void bluetoothSetSpeed(uint16_t speed) {
+	bluetooth_car.speed = speed;
+}
+
 uint16_t bluetoothGetDirection(void) {
 	return bluetooth_car.direction;
+}
+
+void bluetoothSetDirection(uint16_t direction) {
+	bluetooth_car.direction = direction;
 }
 
 uint8_t bluetoothGetSpeedMode(void) {
 	return bluetooth_car.speedMode;
 }
 
+void bluetoothSetSpeedMode(uint8_t speedMode) {
+	bluetooth_car.speedMode = speedMode;
+}
+
 uint8_t  bluetoothGetHorn(void) {
 	return bluetooth_car.horn;
 }
-uint8_t  bluetoothGetLights(void) {
+
+void bluetoothSetHorn(uint8_t horn) {
+	bluetooth_car.horn = horn;
+}
+
+uint8_t bluetoothGetLights(void) {
 	return bluetooth_car.lights;
+}
+
+void bluetoothSetLights(uint8_t lights) {
+	bluetooth_car.lights = lights;
 }
 
 void bluetoothSetBrightness(uint16_t brightness) {
@@ -102,6 +123,10 @@ void bluetoothSetDistanceUSRear(uint16_t distance) {
 
 void bluetoothSetBatteryLevel(uint16_t battery) {
 	bluetooth_car.battery = battery;
+}
+
+uint16_t bluetoothGetSensorServo(void) {
+	return bluetooth_car.sensorServo;
 }
 
 void bluetoothSetSensorServo(uint16_t servo) {

@@ -40,8 +40,15 @@ static void initCarModel(void);
 uint16_t bluetoothGetDirection(void);
 uint16_t bluetoothGetSpeed(void);
 uint8_t  bluetoothGetSpeedMode(void);
+uint16_t bluetoothGetSensorServo(void);
 uint8_t  bluetoothGetHorn(void);
 uint8_t  bluetoothGetLights(void);
+
+void bluetoothSetDirection(uint16_t direction);
+void bluetoothSetSpeed(uint16_t speed);
+void bluetoothSetSpeedMode(uint8_t speedMode);
+void bluetoothSetHorn(uint8_t horn);
+void bluetoothSetLights(uint8_t lights);
 
 void bluetoothSetBrightness(uint16_t brightness);
 
