@@ -79,6 +79,18 @@
             <AckIsAuto>true</AckIsAuto>
             <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
+            <ProfileDescriptors>
+                <ProfileDescriptor Name="GenericActor" MaxDataLength="1" DefaultValue="00" AttributeLenType="1">
+                    <ForceOpen>false</ForceOpen>
+                    <Properties>
+                        <Write>false</Write>
+                        <Read>true</Read>
+                    </Properties>
+                    <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0021</Uuid>
+                    <SetPipe>true</SetPipe>
+                    <AckIsAuto>true</AckIsAuto>
+                </ProfileDescriptor>
+            </ProfileDescriptors>
             <PeriodForProperties>
                 <Write>60000</Write>
             </PeriodForProperties>
