@@ -30,6 +30,7 @@ static void initCarModel(void) {
 	bluetooth_car.lights = 0x00;
 	bluetooth_car.generic_actor_1 = 0x0000;
 	bluetooth_car.generic_actor_2 = 0x0000;
+	bluetooth_car.generic_config = 0x0000;
 	bluetooth_car.name = "defaultCar";
 }
 
@@ -50,6 +51,17 @@ void carBluetoothSetup(char *name) {
 	bluetooth_get_config_defaults(&bluetooth_config);
 	bluetooth_init(&bluetooth_config, &bluetooth_car);
 	
+}
+
+/**
+ * The configuration of the buttons is only available on startup as the smartphome app will read it only on connection once
+ */
+uint8_t carConfigureButton1(uint8_t config) {
+	bluetooth_car.generic_config |= config;
+}
+
+uint8_t carConfigureButton2(uint8_t config) {
+	bluetooth_car.generic_config |= (config << 8);
 }
 
 // Process the bluetooth data

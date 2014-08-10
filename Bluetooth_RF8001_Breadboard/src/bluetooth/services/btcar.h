@@ -13,6 +13,10 @@
 #ifndef BTCAR_H_
 #define BTCAR_H_
 
+#define CONFIG_SWITCH 0x00
+#define CONFIG_BUTTON 0x01
+#define CONFIG_VALUE  0x02
+
 typedef struct bluetooth_car  {
 	uint16_t speed;
 	uint16_t direction;
@@ -28,11 +32,15 @@ typedef struct bluetooth_car  {
 	uint16_t distance_ir_rear;
 	uint16_t generic_actor_1;
 	uint16_t generic_actor_2;
+	uint16_t generic_config;
 	uint16_t temperature;
 	char *name;
 } bluetooth_car_t;
 
 void carBluetoothSetup(char name[PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE]);
+uint8_t carConfigureButton1(uint8_t config);
+uint8_t carConfigureButton2(uint8_t config);
+
 void carBluetoothProcess(void);
 
 static void initCarModel(void);

@@ -33,9 +33,14 @@ static aci_state_t aci_state;
 static hal_aci_evt_t aci_data;
 static hal_aci_data_t aci_cmd;
 
+// The nrfGo Studio outputs a max size of 6, no idea why, so we use 2 here manually
+uint8_t generic_actor_config[2];
+
 static bool radio_ack_pending  = false;
 static bool timing_change_done = false;
 static bool temperature_request_pending = false;
+
+static bool descriptorSet;
 
 // The car model with the current values
 static bluetooth_car_t *car;
@@ -383,9 +388,7 @@ void bluetooth_process(void) {
 					Request a change to the link timing as set in the GAP -> Preferred Peripheral Connection Parameters
 					Change the setting in nRFgo studio -> nRF8001 configuration -> GAP Settings and recompile the xml file.
 					*/
-					// TODO Find out why it doesnt work on the XMEGAA
-					//lib_aci_change_timing_GAP_PPCP();
-					timing_change_done = true;
+					lib_aci_change_timing_GAP_PPCP();
 				}
 				else {
 					// If someone subscribes we want to send a first value to the subscriptor
@@ -394,6 +397,7 @@ void bluetooth_process(void) {
 					speed_and_angle_on_pipe_status(&aci_state, &car->speed, &car->direction, &car->sensorServo);
 					distance_on_pipe_status(&aci_state, &car->distance_ir_front, &car->distance_ir_rear, &car->distance_us_front, &car->distance_us_rear);
 				}
+				
 				
 				break;
 			}
@@ -485,7 +489,13 @@ void bluetooth_process(void) {
 		if (SETUP_SUCCESS == do_aci_setup(&aci_state))
 		{
 			// We set the device name which appears in the Scan data (advertising is configured in nRF Go Studio)
-			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, car->name, PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE);
+			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, car->name, 2);
+			
+			// Set the descriptors of the generic actor (button config for app)
+			generic_actor_config[0] = car->generic_config;
+			generic_actor_config[1] = (car->generic_config >> 8);
+			
+			lib_aci_set_local_data(PIPE_ACTORS_ACTORS_SET_GENERICACTOR, &generic_actor_config, 2);
 			
 			// We init our characteristics with a reference to the oldCar's struct member
 			actors_init(&oldcar.horn, &oldcar.lights, &oldcar.generic_actor_1, &oldcar.generic_actor_2);
@@ -499,7 +509,7 @@ void bluetooth_process(void) {
 	
 	
 	bluetooth_values_process();
-	
+
 }
 
 // Do the transmission of the cars values

@@ -80,13 +80,13 @@
             <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <ProfileDescriptors>
-                <ProfileDescriptor Name="GenericActor" MaxDataLength="1" DefaultValue="00" AttributeLenType="1">
+                <ProfileDescriptor Name="GenericActor" MaxDataLength="2" DefaultValue="0000" AttributeLenType="1">
                     <ForceOpen>false</ForceOpen>
                     <Properties>
                         <Write>false</Write>
                         <Read>true</Read>
                     </Properties>
-                    <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0021</Uuid>
+                    <Uuid BaseUUID="5d5f00005020e67011e3a4f30002a5d5" BaseUUIDName="IAS">0021</Uuid>
                     <SetPipe>true</SetPipe>
                     <AckIsAuto>true</AckIsAuto>
                 </ProfileDescriptor>

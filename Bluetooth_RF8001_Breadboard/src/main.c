@@ -38,6 +38,8 @@ int main (void) {
 	sysclk_init();
 	// Max 10 chars
 	carBluetoothSetup("BlaBlaCar");
+	carConfigureButton1(CONFIG_BUTTON);
+	carConfigureButton2(CONFIG_SWITCH);
 	
 	while(true) {
 		carBluetoothProcess();
