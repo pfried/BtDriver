@@ -61,7 +61,7 @@ void distance_update(aci_state_t *aci_state, uint16_t *distance_ir_front, uint16
 		}
 	}	
 	
-	if(distance_difference_ir_front >= DISTANCE_IR_FRONT_LVL_THRESHOLD | distance_difference_ir_rear > DISTANCE_IR_REAR_LVL_THRESHOLD | distance_difference_us_front > DISTANCE_US_FRONT_LVL_THRESHOLD | distance_difference_us_rear > DISTANCE_US_REAR_LVL_THRESHOLD) {
+	if(distance_difference_ir_front >= DISTANCE_IR_FRONT_LVL_THRESHOLD || distance_difference_ir_rear >= DISTANCE_IR_REAR_LVL_THRESHOLD || distance_difference_us_front >= DISTANCE_US_FRONT_LVL_THRESHOLD || distance_difference_us_rear >= DISTANCE_US_REAR_LVL_THRESHOLD) {
 		
 		distance_value[0] = *distance_ir_front;
 		distance_value[1] = (*distance_ir_front >> 8);

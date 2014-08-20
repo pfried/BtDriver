@@ -50,7 +50,7 @@ void speed_and_angle_update(aci_state_t *aci_state, uint16_t *speed, uint16_t *a
 		}
 	}	
 	
-	if(speed_difference >= SPEED_LVL_THRESHOLD | angle_difference >= ANGLE_LVL_THRESHOLD | servo_difference >= SENSOR_SERVO_THRESHOLD) {
+	if(speed_difference >= SPEED_LVL_THRESHOLD || angle_difference >= ANGLE_LVL_THRESHOLD || servo_difference >= SENSOR_SERVO_THRESHOLD) {
 		
 		speed_and_angle_value[0] = *speed;
 		speed_and_angle_value[1] = (*speed >> 8);

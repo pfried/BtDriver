@@ -49,7 +49,7 @@ sensors_update(aci_state_t *aci_state, uint16_t *newBrightness, uint16_t *newTem
 			}
 		}
 	
-	if(brightness_difference >= BRIGHTNESS_LVL_CHANGE_THRESHOLD | temperature_difference >= TEMPERATURE_LVL_CHANGE_THRESHOLD | battery_difference >= BATTERY_LVL_CHANGE_THRESHOLD) {
+	if(brightness_difference >= BRIGHTNESS_LVL_CHANGE_THRESHOLD || temperature_difference >= TEMPERATURE_LVL_CHANGE_THRESHOLD || battery_difference >= BATTERY_LVL_CHANGE_THRESHOLD) {
 		
 		sensors_value[0] = *newBrightness;
 		sensors_value[1] = (*newBrightness >> 8);

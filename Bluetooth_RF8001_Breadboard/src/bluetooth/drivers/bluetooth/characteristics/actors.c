@@ -24,26 +24,11 @@ void actors_init(uint8_t *horn, uint8_t *lights, uint16_t *generic_actor_1, uint
 
 void actors_update(aci_state_t *aci_state, uint8_t *horn, uint8_t *lights, uint16_t *generic_actor_1, uint16_t *generic_actor_2) {
 	
-	uint8_t horn_difference = 0;
-	uint8_t lights_difference = 0;
+	uint8_t horn_difference = *horn == *old_horn;
+	uint8_t lights_difference = *lights != *old_lights;
+	
 	uint16_t generic_actor_1_difference = 0;
 	uint16_t generic_actor_2_difference = 0;
-	
-	if(*horn != *old_horn) {
-		if(*horn < *old_horn) {
-			horn_difference = *old_horn - *horn;
-			} else {
-			horn_difference = *horn - *old_horn;
-		}
-	}
-	
-	if(*lights != *old_lights) {
-		if(*lights < *old_lights) {
-			lights_difference = *old_lights - *lights;
-			} else {
-			lights_difference = *lights - *old_lights;
-		}
-	}
 	
 	if(*generic_actor_1 != *old_generic_actor_1) {
 		if(*generic_actor_1 < *old_generic_actor_1) {
@@ -61,9 +46,9 @@ void actors_update(aci_state_t *aci_state, uint8_t *horn, uint8_t *lights, uint1
 		}
 	}
 	
-	if(horn_difference >= HORN_LVL_THRESHOLD | lights_difference > LIGHTS_LVL_THRESHOLD | generic_actor_1_difference > GENERIC_ACTOR_1_LVL_THRESHOLD | generic_actor_2_difference > GENERIC_ACTOR_2_LVL_THRESHOLD) {
+	if(horn_difference || lights_difference|| generic_actor_1_difference >= GENERIC_ACTOR_1_LVL_THRESHOLD || generic_actor_2_difference >= GENERIC_ACTOR_2_LVL_THRESHOLD) {
 		
-		actors_value[0] = *horn;
+		actors_value[0] = 0;
 		actors_value[1] = *lights;
 		actors_value[2] = *generic_actor_1;
 		actors_value[3] = (*generic_actor_1 >> 8);

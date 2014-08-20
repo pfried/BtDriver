@@ -12,8 +12,6 @@
 #include "../lib/services.h"
 #include "../lib/lib_aci.h"
 
-#define HORN_LVL_THRESHOLD 1
-#define LIGHTS_LVL_THRESHOLD 1
 #define GENERIC_ACTOR_1_LVL_THRESHOLD 1
 #define GENERIC_ACTOR_2_LVL_THRESHOLD 1
 

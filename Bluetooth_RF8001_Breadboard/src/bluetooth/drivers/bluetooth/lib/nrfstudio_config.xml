@@ -4,73 +4,6 @@
     <SetupId>0</SetupId>
     <Device>nRF8001_Dx</Device>
     <Service Type="local" PrimaryService="true">
-        <Name>Device Information</Name>
-        <Uuid>180a</Uuid>
-        <Characteristic>
-            <Name>Model Number String</Name>
-            <Uuid>2a24</Uuid>
-            <DefaultValue>v0.0.1</DefaultValue>
-            <UsePresentationFormat>1</UsePresentationFormat>
-            <MaxDataLength>6</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>false</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="25" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>0</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties/>
-        </Characteristic>
-        <Characteristic>
-            <Name>Hardware Revision String</Name>
-            <Uuid>2a27</Uuid>
-            <DefaultValue>0.2</DefaultValue>
-            <UsePresentationFormat>1</UsePresentationFormat>
-            <MaxDataLength>3</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>false</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="25" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>0</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties/>
-        </Characteristic>
-        <Characteristic>
-            <Name>Manufacturer Name String</Name>
-            <Uuid>2a29</Uuid>
-            <DefaultValue>IAS Uni Stuttgart</DefaultValue>
-            <UsePresentationFormat>1</UsePresentationFormat>
-            <MaxDataLength>20</MaxDataLength>
-            <AttributeLenType>1</AttributeLenType>
-            <ForceOpen>false</ForceOpen>
-            <Properties>
-                <WriteWithoutResponse>false</WriteWithoutResponse>
-                <Write>false</Write>
-                <Notify>false</Notify>
-                <Indicate>false</Indicate>
-                <Broadcast>false</Broadcast>
-            </Properties>
-            <SetPipe>false</SetPipe>
-            <AckIsAuto>false</AckIsAuto>
-            <PresentationFormatDescriptor Value="0000" Exponent="0" Format="25" NameSpace="01" Unit="0000"/>
-            <PeriodForReadingThisCharacteristic>0</PeriodForReadingThisCharacteristic>
-            <PeriodForProperties/>
-        </Characteristic>
-    </Service>
-    <Service Type="local" PrimaryService="true">
         <Name>Sensors</Name>
         <Uuid>0010</Uuid>
         <Characteristic>
@@ -147,13 +80,13 @@
             <PresentationFormatDescriptor Value="0000" Exponent="0" Format="1" NameSpace="01" Unit="0000"/>
             <PeriodForReadingThisCharacteristic>60000</PeriodForReadingThisCharacteristic>
             <ProfileDescriptors>
-                <ProfileDescriptor Name="GenericActor" MaxDataLength="2" DefaultValue="0000" AttributeLenType="1">
+                <ProfileDescriptor Name="GenericActor" MaxDataLength="2" DefaultValue="00" AttributeLenType="1">
                     <ForceOpen>false</ForceOpen>
                     <Properties>
                         <Write>false</Write>
                         <Read>true</Read>
                     </Properties>
-                    <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">00f0</Uuid>
+                    <Uuid BaseUUID="5D5f0000E67011E3A4F30002A5D5C51B" BaseUUIDName="IAS">0020</Uuid>
                     <SetPipe>true</SetPipe>
                     <AckIsAuto>true</AckIsAuto>
                 </ProfileDescriptor>
@@ -204,10 +137,10 @@
         <MinimumKeySize>7</MinimumKeySize>
         <MaximumKeySize>16</MaximumKeySize>
         <AdvertisingDataBondedBitmap>0</AdvertisingDataBondedBitmap>
-        <AdvertisingDataGeneralBitmap>1a</AdvertisingDataGeneralBitmap>
+        <AdvertisingDataGeneralBitmap>10</AdvertisingDataGeneralBitmap>
         <AdvertisingDataBrodcastBitmap>10</AdvertisingDataBrodcastBitmap>
         <AdvertisingDataBondedScanResponseBitmap>0</AdvertisingDataBondedScanResponseBitmap>
-        <AdvertisingDataGeneralScanResponseBitmap>1a</AdvertisingDataGeneralScanResponseBitmap>
+        <AdvertisingDataGeneralScanResponseBitmap>10</AdvertisingDataGeneralScanResponseBitmap>
         <AdvertisingDataBrodcastScanResponseBitmap>10</AdvertisingDataBrodcastScanResponseBitmap>
         <AdvertisingDataBondedBitmapCustom>0</AdvertisingDataBondedBitmapCustom>
         <AdvertisingDataGeneralBitmapCustom>0</AdvertisingDataGeneralBitmapCustom>
