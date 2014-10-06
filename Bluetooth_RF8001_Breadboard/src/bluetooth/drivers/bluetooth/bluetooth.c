@@ -356,7 +356,8 @@ void bluetooth_process(void) {
 					case PIPE_ACTORS_ACTORS_RX_ACK_AUTO:
 					{
 						car->horn   = aci_evt->params.data_received.rx_data.aci_data[0];
-						car->lights = aci_evt->params.data_received.rx_data.aci_data[1];
+						// Do not set the lights here as this will cause loops
+						//car->lights = aci_evt->params.data_received.rx_data.aci_data[1];
 						car->generic_actor_1 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[3] << 8) | aci_evt->params.data_received.rx_data.aci_data[2];
 						car->generic_actor_2 = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[5] << 8) | aci_evt->params.data_received.rx_data.aci_data[4];
 						break;
@@ -489,7 +490,7 @@ void bluetooth_process(void) {
 		if (SETUP_SUCCESS == do_aci_setup(&aci_state))
 		{
 			// We set the device name which appears in the Scan data (advertising is configured in nRF Go Studio)
-			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, car->name, 2);
+			lib_aci_set_local_data(PIPE_GAP_DEVICE_NAME_SET, car->name, PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE);
 			
 			// Set the descriptors of the generic actor (button config for app)
 			generic_actor_config[0] = car->generic_config;
