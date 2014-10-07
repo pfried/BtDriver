@@ -4,11 +4,14 @@
  * @copyright IAS, University of Stuttgart, Germany
  *
  * @brief Header of the Bluetooth Service
+ *
+ * This module uses the TC F1 and PortC
  */
 
 #include <stdint.h>
 #include "../drivers/bluetooth/bluetooth.h"
 #include "../drivers/bluetooth/lib/services.h"
+#include "GlobalDefinitions.h"
 
 #ifndef BTCAR_H_
 #define BTCAR_H_
@@ -16,6 +19,8 @@
 #define CONFIG_SWITCH 0x00
 #define CONFIG_BUTTON 0x01
 #define CONFIG_VALUE  0x02
+
+#define SPEED_STOP 0x02ee
 
 typedef struct bluetooth_car  {
 	uint16_t speed;
@@ -35,11 +40,14 @@ typedef struct bluetooth_car  {
 	uint16_t generic_config;
 	uint16_t temperature;
 	char *name;
+	bool safetyStop;
 } bluetooth_car_t;
 
 void carBluetoothSetup(char name[PIPE_GAP_DEVICE_NAME_SET_MAX_SIZE]);
 uint8_t carConfigureButton1(uint8_t config);
 uint8_t carConfigureButton2(uint8_t config);
+
+void setBit(uint8_t *byte_value, char status, int bit);
 
 void carBluetoothProcess(void);
 
@@ -55,8 +63,13 @@ uint8_t  bluetoothGetLights(void);
 void bluetoothSetDirection(uint16_t direction);
 void bluetoothSetSpeed(uint16_t speed);
 void bluetoothSetSpeedMode(uint8_t speedMode);
+
 void bluetoothSetHorn(uint8_t horn);
-void bluetoothSetLights(uint8_t lights);
+
+void bluetoothSetBrakeLight(int status);
+void bluetoothSetFrontLight(int status);
+void bluetoothSetReverseLight(int status);
+void bluetoothSetTurnSignal(char dir, int status);
 
 void bluetoothSetBrightness(uint16_t brightness);
 

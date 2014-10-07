@@ -12,6 +12,7 @@
 #include "../drivers/bt_active_led/bt_active_led.h"
 
 bluetooth_car_t bluetooth_car;
+static bool isSafetyStop = false;
 
 // A model to synchronize Bluetooth and Car, initialize Values to 0;
 static void initCarModel(void) {
@@ -32,6 +33,7 @@ static void initCarModel(void) {
 	bluetooth_car.generic_actor_2 = 0x0000;
 	bluetooth_car.generic_config = 0x0000;
 	bluetooth_car.name = "defaultCar";
+	bluetooth_car.safetyStop = false;
 }
 
 /**
@@ -53,8 +55,17 @@ void carBluetoothSetup(char *name) {
 	
 }
 
+void setBit(uint8_t *byte_value, char status, int bit) {
+	if(status) {
+		*byte_value |= (1 << bit);
+	} else {
+		*byte_value &= ~(1 << bit);
+	}
+}
+
+
 /**
- * The configuration of the buttons is only available on startup as the smartphome app will read it only on connection once
+ * The configuration of the buttons is only available on startup as the smartphone app will read it only on connection once
  */
 uint8_t carConfigureButton1(uint8_t config) {
 	bluetooth_car.generic_config |= config;
@@ -70,6 +81,11 @@ void carBluetoothProcess(void) {
 }
 
 uint16_t bluetoothGetSpeed(void) {
+	
+	if(bluetooth_car.safetyStop == true) {
+		return SPEED_STOP;
+	}
+	
 	return bluetooth_car.speed;
 }
 
@@ -93,7 +109,7 @@ void bluetoothSetSpeedMode(uint8_t speedMode) {
 	bluetooth_car.speedMode = speedMode;
 }
 
-uint8_t  bluetoothGetHorn(void) {
+uint8_t bluetoothGetHorn(void) {		
 	return bluetooth_car.horn;
 }
 
@@ -107,6 +123,27 @@ uint8_t bluetoothGetLights(void) {
 
 void bluetoothSetLights(uint8_t lights) {
 	bluetooth_car.lights = lights;
+}
+
+void bluetoothSetBrakeLight(int status) {
+	setBit(&bluetooth_car.lights, status, 2);
+}
+
+void bluetoothSetFrontLight(int status) {
+	setBit(&bluetooth_car.lights, status, 0);
+}
+
+void bluetoothSetReverseLight(int status) {
+	setBit(&bluetooth_car.lights, status, 1);
+}
+
+void bluetoothSetTurnSignal(char dir, int status) {
+	if(dir == LED_TURNLEFT) {
+		setBit(&bluetooth_car.lights, status, 3);
+	}
+	if(dir == LED_TURNRIGHT) {
+		setBit(&bluetooth_car.lights, status, 4);
+	}
 }
 
 void bluetoothSetBrightness(uint16_t brightness) {
@@ -160,4 +197,3 @@ void bluetoothSetGenericActor2(uint16_t actor) {
 uint16_t bluetoothGetGenericActor2(void) {
 	return bluetooth_car.generic_actor_2;
 }
-

@@ -48,6 +48,8 @@ static bluetooth_car_t *car;
 static bluetooth_car_t oldcar;
 // Bluetooth transmission counter
 static int bt_counter = 0;
+// Bluetooth receiving counter, keep track of received drive packages as a kind of heartbeat
+static int bt_safety_counter = 0;
 
 uint8_t pipes_open_bitmap_old[PIPES_ARRAY_SIZE];
 
@@ -72,7 +74,7 @@ void bluetooth_ovf_interrupt_callback(void) {
 ISR(PORTC_INT_vect) {
 	if(bt_callback) {
 		bt_callback();
-		// Clear the Interrupt, no idea why it doesnt get cleared in ISR
+		// Clear the Interrupt, no idea why it does not get cleared in ISR
 		PORTC.INTFLAGS |= PORT_INT2IF_bm;
 	}
 }
@@ -82,7 +84,7 @@ ISR(PORTC_INT_vect) {
 ISR(PORTC_INT0_vect) {
 	if(bt_callback) {
 		bt_callback();
-		// Clear the Interrupt, no idea why it doesnt get cleared in ISR
+		// Clear the Interrupt, no idea why it does not get cleared in ISR
 		PORTC.INTFLAGS |= PORT_INT0IF_bm;
 	}
 }
@@ -324,6 +326,7 @@ void bluetooth_process(void) {
 				// Set the available credits
 				aci_state.data_credit_available = aci_state.data_credit_total;
 				timing_change_done = false;
+				car->safetyStop = false;
 
 				//Get the device version of the nRF8001 and store it in the Hardware Revision String
 				lib_aci_device_version();
@@ -334,6 +337,8 @@ void bluetooth_process(void) {
 			case ACI_EVT_DISCONNECTED:
 			{
 				BT_LED_Off();
+				car->speed = SPEED_STOP;
+				car->safetyStop = false;
 				timing_change_done = false;
 				lib_aci_connect(0/* in seconds  : 0 means forever */, 0x0050 /* advertising interval 50ms*/);
 				break;
@@ -346,6 +351,9 @@ void bluetooth_process(void) {
 					// Speed and Angle
 					case PIPE_DRIVE_SPEEDANDANGLE_RX:
 					{
+						// Reset the safety counter if we receive drive packages
+						bt_safety_counter = 0;
+						
 						car->direction   = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[1] << 8) | aci_evt->params.data_received.rx_data.aci_data[0];
 						car->speed       = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[3] << 8) | aci_evt->params.data_received.rx_data.aci_data[2];
 						car->sensorServo = ((uint16_t) aci_evt->params.data_received.rx_data.aci_data[5] << 8) | aci_evt->params.data_received.rx_data.aci_data[4];
@@ -518,6 +526,14 @@ void bluetooth_values_process(void) {
 	
 	// We are in connected mode if timing is done
 	if(timing_change_done == true) {
+		
+		// Increment the safety counter
+		if(bt_safety_counter < BLUETOOTH_SAFETY_TOP) {
+			car->safetyStop = false;
+			bt_safety_counter++;
+			} else {
+			car->safetyStop = true;
+		}
 		
 		// Check if the interrupt occured
 		if(bluetooth_process_flag == true) {
