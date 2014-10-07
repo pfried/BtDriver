@@ -20,6 +20,7 @@
 
 
 #define BLUETOOTH_DATA_RATE 1
+#define BLUETOOTH_SAFETY_TOP 30
 
 #define BLUETOOTH_RX_BUFFER_SIZE 8
 #define BLUETOOTH_TX_BUFFER_SIZE 8
@@ -42,6 +43,8 @@
 #define MISO   IOPORT_CREATE_PIN(PORTC, 6)
 #define SCK    IOPORT_CREATE_PIN(PORTC, 7)
 #define SS     IOPORT_CREATE_PIN(PORTC, 4)
+
+#define TEMPERATURE_TIMER_RESOLUTION 1
 
 /*! \brief Bluetooth driver struct
  *

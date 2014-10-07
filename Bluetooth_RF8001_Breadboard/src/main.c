@@ -37,7 +37,9 @@ int main (void) {
 	board_init();
 	sysclk_init();
 	// Max 10 chars
-	carBluetoothSetup("FranziCar");
+	carBluetoothSetup("BlaBlaCar");
+	carConfigureButton1(CONFIG_BUTTON);
+	carConfigureButton2(CONFIG_SWITCH);
 	
 	while(true) {
 		carBluetoothProcess();
@@ -50,6 +52,8 @@ int main (void) {
 		
 		bluetoothSetBrightness(button);
 		bluetoothSetDistanceUSFront(button2);
+		
+		bluetoothSetSensorServo(65000);
 		
 		if(genericActor1State == 0x0001) {
 			LED_On(LED1);

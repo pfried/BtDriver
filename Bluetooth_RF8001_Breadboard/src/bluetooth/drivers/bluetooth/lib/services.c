@@ -35,33 +35,24 @@
 #include "lib_aci.h"
 
 static bool is_gap_device_name_set_requested = false;
-static bool is_brightness_brightness_send_requested = false;
-static bool is_distance_distanceirfront_send_requested = false;
-static bool is_distance_distanceirrear_send_requested = false;
-static bool is_distance_distanceusfront_send_requested = false;
-static bool is_distance_distanceusrear_send_requested = false;
-static bool is_batterylevel_batterylevel_send_requested = false;
-static bool is_generic_genericsensor1_send_requested = false;
-static bool is_generic_genericsensor2_send_requested = false;
+static bool is_sensors_sensors_send_requested = false;
+static bool is_distance_distance_send_requested = false;
+static bool is_actors_actors_send_requested = false;
+static bool is_actors_actors_genericactor_set_requested = false;
+static bool is_drive_speedandangle_send_requested = false;
 
 static void *gap_device_name_set;
 static uint8_t gap_device_name_set_size;
-static void *brightness_brightness_tx;
-static uint8_t brightness_brightness_tx_size;
-static void *distance_distanceirfront_tx;
-static uint8_t distance_distanceirfront_tx_size;
-static void *distance_distanceirrear_tx;
-static uint8_t distance_distanceirrear_tx_size;
-static void *distance_distanceusfront_tx;
-static uint8_t distance_distanceusfront_tx_size;
-static void *distance_distanceusrear_tx;
-static uint8_t distance_distanceusrear_tx_size;
-static void *batterylevel_batterylevel_tx;
-static uint8_t batterylevel_batterylevel_tx_size;
-static void *generic_genericsensor1_tx;
-static uint8_t generic_genericsensor1_tx_size;
-static void *generic_genericsensor2_tx;
-static uint8_t generic_genericsensor2_tx_size;
+static void *sensors_sensors_tx;
+static uint8_t sensors_sensors_tx_size;
+static void *distance_distance_tx;
+static uint8_t distance_distance_tx_size;
+static void *actors_actors_tx;
+static uint8_t actors_actors_tx_size;
+static void *actors_actors_set_genericactor;
+static uint8_t actors_actors_set_genericactor_size;
+static void *drive_speedandangle_tx;
+static uint8_t drive_speedandangle_tx_size;
 
 static bool gap_device_name_update_set(void)
 {
@@ -75,28 +66,28 @@ void services_set_gap_device_name(void *src, int size)
   is_gap_device_name_set_requested = true;
   services_update_pipes();
 }
-static bool brightness_brightness_update_send(void)
+static bool sensors_sensors_update_send(void)
 {
-  if (lib_aci_is_pipe_available(PIPE_BRIGHTNESS_BRIGHTNESS_TX))
+  if (lib_aci_is_pipe_available(PIPE_SENSORS_SENSORS_TX))
   {
-    return(lib_aci_send_data(PIPE_BRIGHTNESS_BRIGHTNESS_TX, (void*)brightness_brightness_tx, brightness_brightness_tx_size));
+    return(lib_aci_send_data(PIPE_SENSORS_SENSORS_TX, (void*)sensors_sensors_tx, sensors_sensors_tx_size));
   }
   return(false);
 }
 
-bool services_send_brightness_brightness(void *src, int size, bool is_freshest_sample)
+bool services_send_sensors_sensors(void *src, int size, bool is_freshest_sample)
 {
   if (false == is_freshest_sample)
   {
-    if (true == is_brightness_brightness_send_requested)
+    if (true == is_sensors_sensors_send_requested)
     {
       services_update_pipes();
     }
-    if (false == is_brightness_brightness_send_requested)
+    if (false == is_sensors_sensors_send_requested)
     {
-      brightness_brightness_tx_size = size;
-      brightness_brightness_tx = src;
-      is_brightness_brightness_send_requested = true;
+      sensors_sensors_tx_size = size;
+      sensors_sensors_tx = src;
+      is_sensors_sensors_send_requested = true;
       services_update_pipes();
       return(true);
     }
@@ -104,35 +95,35 @@ bool services_send_brightness_brightness(void *src, int size, bool is_freshest_s
   }
   else
   {
-    brightness_brightness_tx_size = size;
-    brightness_brightness_tx = src;
-    is_brightness_brightness_send_requested = true;
+    sensors_sensors_tx_size = size;
+    sensors_sensors_tx = src;
+    is_sensors_sensors_send_requested = true;
     services_update_pipes();
     return(true);
   }
 }
-static bool distance_distanceirfront_update_send(void)
+static bool distance_distance_update_send(void)
 {
-  if (lib_aci_is_pipe_available(PIPE_DISTANCE_DISTANCEIRFRONT_TX))
+  if (lib_aci_is_pipe_available(PIPE_DISTANCE_DISTANCE_TX))
   {
-    return(lib_aci_send_data(PIPE_DISTANCE_DISTANCEIRFRONT_TX, (void*)distance_distanceirfront_tx, distance_distanceirfront_tx_size));
+    return(lib_aci_send_data(PIPE_DISTANCE_DISTANCE_TX, (void*)distance_distance_tx, distance_distance_tx_size));
   }
   return(false);
 }
 
-bool services_send_distance_distanceirfront(void *src, int size, bool is_freshest_sample)
+bool services_send_distance_distance(void *src, int size, bool is_freshest_sample)
 {
   if (false == is_freshest_sample)
   {
-    if (true == is_distance_distanceirfront_send_requested)
+    if (true == is_distance_distance_send_requested)
     {
       services_update_pipes();
     }
-    if (false == is_distance_distanceirfront_send_requested)
+    if (false == is_distance_distance_send_requested)
     {
-      distance_distanceirfront_tx_size = size;
-      distance_distanceirfront_tx = src;
-      is_distance_distanceirfront_send_requested = true;
+      distance_distance_tx_size = size;
+      distance_distance_tx = src;
+      is_distance_distance_send_requested = true;
       services_update_pipes();
       return(true);
     }
@@ -140,35 +131,35 @@ bool services_send_distance_distanceirfront(void *src, int size, bool is_freshes
   }
   else
   {
-    distance_distanceirfront_tx_size = size;
-    distance_distanceirfront_tx = src;
-    is_distance_distanceirfront_send_requested = true;
+    distance_distance_tx_size = size;
+    distance_distance_tx = src;
+    is_distance_distance_send_requested = true;
     services_update_pipes();
     return(true);
   }
 }
-static bool distance_distanceirrear_update_send(void)
+static bool actors_actors_update_send(void)
 {
-  if (lib_aci_is_pipe_available(PIPE_DISTANCE_DISTANCEIRREAR_TX))
+  if (lib_aci_is_pipe_available(PIPE_ACTORS_ACTORS_TX))
   {
-    return(lib_aci_send_data(PIPE_DISTANCE_DISTANCEIRREAR_TX, (void*)distance_distanceirrear_tx, distance_distanceirrear_tx_size));
+    return(lib_aci_send_data(PIPE_ACTORS_ACTORS_TX, (void*)actors_actors_tx, actors_actors_tx_size));
   }
   return(false);
 }
 
-bool services_send_distance_distanceirrear(void *src, int size, bool is_freshest_sample)
+bool services_send_actors_actors(void *src, int size, bool is_freshest_sample)
 {
   if (false == is_freshest_sample)
   {
-    if (true == is_distance_distanceirrear_send_requested)
+    if (true == is_actors_actors_send_requested)
     {
       services_update_pipes();
     }
-    if (false == is_distance_distanceirrear_send_requested)
+    if (false == is_actors_actors_send_requested)
     {
-      distance_distanceirrear_tx_size = size;
-      distance_distanceirrear_tx = src;
-      is_distance_distanceirrear_send_requested = true;
+      actors_actors_tx_size = size;
+      actors_actors_tx = src;
+      is_actors_actors_send_requested = true;
       services_update_pipes();
       return(true);
     }
@@ -176,35 +167,47 @@ bool services_send_distance_distanceirrear(void *src, int size, bool is_freshest
   }
   else
   {
-    distance_distanceirrear_tx_size = size;
-    distance_distanceirrear_tx = src;
-    is_distance_distanceirrear_send_requested = true;
+    actors_actors_tx_size = size;
+    actors_actors_tx = src;
+    is_actors_actors_send_requested = true;
     services_update_pipes();
     return(true);
   }
 }
-static bool distance_distanceusfront_update_send(void)
+static bool actors_actors_update_set_genericactor(void)
 {
-  if (lib_aci_is_pipe_available(PIPE_DISTANCE_DISTANCEUSFRONT_TX))
+  return(lib_aci_set_local_data(PIPE_ACTORS_ACTORS_SET_GENERICACTOR, (void*)actors_actors_set_genericactor, actors_actors_set_genericactor_size));
+}
+
+void services_set_actors_actors_genericactor(void *src, int size)
+{
+  actors_actors_set_genericactor_size = size;
+  actors_actors_set_genericactor = src;
+  is_actors_actors_genericactor_set_requested = true;
+  services_update_pipes();
+}
+static bool drive_speedandangle_update_send(void)
+{
+  if (lib_aci_is_pipe_available(PIPE_DRIVE_SPEEDANDANGLE_TX))
   {
-    return(lib_aci_send_data(PIPE_DISTANCE_DISTANCEUSFRONT_TX, (void*)distance_distanceusfront_tx, distance_distanceusfront_tx_size));
+    return(lib_aci_send_data(PIPE_DRIVE_SPEEDANDANGLE_TX, (void*)drive_speedandangle_tx, drive_speedandangle_tx_size));
   }
   return(false);
 }
 
-bool services_send_distance_distanceusfront(void *src, int size, bool is_freshest_sample)
+bool services_send_drive_speedandangle(void *src, int size, bool is_freshest_sample)
 {
   if (false == is_freshest_sample)
   {
-    if (true == is_distance_distanceusfront_send_requested)
+    if (true == is_drive_speedandangle_send_requested)
     {
       services_update_pipes();
     }
-    if (false == is_distance_distanceusfront_send_requested)
+    if (false == is_drive_speedandangle_send_requested)
     {
-      distance_distanceusfront_tx_size = size;
-      distance_distanceusfront_tx = src;
-      is_distance_distanceusfront_send_requested = true;
+      drive_speedandangle_tx_size = size;
+      drive_speedandangle_tx = src;
+      is_drive_speedandangle_send_requested = true;
       services_update_pipes();
       return(true);
     }
@@ -212,153 +215,9 @@ bool services_send_distance_distanceusfront(void *src, int size, bool is_freshes
   }
   else
   {
-    distance_distanceusfront_tx_size = size;
-    distance_distanceusfront_tx = src;
-    is_distance_distanceusfront_send_requested = true;
-    services_update_pipes();
-    return(true);
-  }
-}
-static bool distance_distanceusrear_update_send(void)
-{
-  if (lib_aci_is_pipe_available(PIPE_DISTANCE_DISTANCEUSREAR_TX))
-  {
-    return(lib_aci_send_data(PIPE_DISTANCE_DISTANCEUSREAR_TX, (void*)distance_distanceusrear_tx, distance_distanceusrear_tx_size));
-  }
-  return(false);
-}
-
-bool services_send_distance_distanceusrear(void *src, int size, bool is_freshest_sample)
-{
-  if (false == is_freshest_sample)
-  {
-    if (true == is_distance_distanceusrear_send_requested)
-    {
-      services_update_pipes();
-    }
-    if (false == is_distance_distanceusrear_send_requested)
-    {
-      distance_distanceusrear_tx_size = size;
-      distance_distanceusrear_tx = src;
-      is_distance_distanceusrear_send_requested = true;
-      services_update_pipes();
-      return(true);
-    }
-    return(false);
-  }
-  else
-  {
-    distance_distanceusrear_tx_size = size;
-    distance_distanceusrear_tx = src;
-    is_distance_distanceusrear_send_requested = true;
-    services_update_pipes();
-    return(true);
-  }
-}
-static bool batterylevel_batterylevel_update_send(void)
-{
-  if (lib_aci_is_pipe_available(PIPE_BATTERYLEVEL_BATTERYLEVEL_TX))
-  {
-    return(lib_aci_send_data(PIPE_BATTERYLEVEL_BATTERYLEVEL_TX, (void*)batterylevel_batterylevel_tx, batterylevel_batterylevel_tx_size));
-  }
-  return(false);
-}
-
-bool services_send_batterylevel_batterylevel(void *src, int size, bool is_freshest_sample)
-{
-  if (false == is_freshest_sample)
-  {
-    if (true == is_batterylevel_batterylevel_send_requested)
-    {
-      services_update_pipes();
-    }
-    if (false == is_batterylevel_batterylevel_send_requested)
-    {
-      batterylevel_batterylevel_tx_size = size;
-      batterylevel_batterylevel_tx = src;
-      is_batterylevel_batterylevel_send_requested = true;
-      services_update_pipes();
-      return(true);
-    }
-    return(false);
-  }
-  else
-  {
-    batterylevel_batterylevel_tx_size = size;
-    batterylevel_batterylevel_tx = src;
-    is_batterylevel_batterylevel_send_requested = true;
-    services_update_pipes();
-    return(true);
-  }
-}
-static bool generic_genericsensor1_update_send(void)
-{
-  if (lib_aci_is_pipe_available(PIPE_GENERIC_GENERICSENSOR1_TX))
-  {
-    return(lib_aci_send_data(PIPE_GENERIC_GENERICSENSOR1_TX, (void*)generic_genericsensor1_tx, generic_genericsensor1_tx_size));
-  }
-  return(false);
-}
-
-bool services_send_generic_genericsensor1(void *src, int size, bool is_freshest_sample)
-{
-  if (false == is_freshest_sample)
-  {
-    if (true == is_generic_genericsensor1_send_requested)
-    {
-      services_update_pipes();
-    }
-    if (false == is_generic_genericsensor1_send_requested)
-    {
-      generic_genericsensor1_tx_size = size;
-      generic_genericsensor1_tx = src;
-      is_generic_genericsensor1_send_requested = true;
-      services_update_pipes();
-      return(true);
-    }
-    return(false);
-  }
-  else
-  {
-    generic_genericsensor1_tx_size = size;
-    generic_genericsensor1_tx = src;
-    is_generic_genericsensor1_send_requested = true;
-    services_update_pipes();
-    return(true);
-  }
-}
-static bool generic_genericsensor2_update_send(void)
-{
-  if (lib_aci_is_pipe_available(PIPE_GENERIC_GENERICSENSOR2_TX))
-  {
-    return(lib_aci_send_data(PIPE_GENERIC_GENERICSENSOR2_TX, (void*)generic_genericsensor2_tx, generic_genericsensor2_tx_size));
-  }
-  return(false);
-}
-
-bool services_send_generic_genericsensor2(void *src, int size, bool is_freshest_sample)
-{
-  if (false == is_freshest_sample)
-  {
-    if (true == is_generic_genericsensor2_send_requested)
-    {
-      services_update_pipes();
-    }
-    if (false == is_generic_genericsensor2_send_requested)
-    {
-      generic_genericsensor2_tx_size = size;
-      generic_genericsensor2_tx = src;
-      is_generic_genericsensor2_send_requested = true;
-      services_update_pipes();
-      return(true);
-    }
-    return(false);
-  }
-  else
-  {
-    generic_genericsensor2_tx_size = size;
-    generic_genericsensor2_tx = src;
-    is_generic_genericsensor2_send_requested = true;
+    drive_speedandangle_tx_size = size;
+    drive_speedandangle_tx = src;
+    is_drive_speedandangle_send_requested = true;
     services_update_pipes();
     return(true);
   }
@@ -370,37 +229,25 @@ void services_update_pipes(void)
   {
     is_gap_device_name_set_requested = !(gap_device_name_update_set());
   }
-  if(is_brightness_brightness_send_requested)
+  if(is_sensors_sensors_send_requested)
   {
-    is_brightness_brightness_send_requested = !(brightness_brightness_update_send());
+    is_sensors_sensors_send_requested = !(sensors_sensors_update_send());
   }
-  if(is_distance_distanceirfront_send_requested)
+  if(is_distance_distance_send_requested)
   {
-    is_distance_distanceirfront_send_requested = !(distance_distanceirfront_update_send());
+    is_distance_distance_send_requested = !(distance_distance_update_send());
   }
-  if(is_distance_distanceirrear_send_requested)
+  if(is_actors_actors_send_requested)
   {
-    is_distance_distanceirrear_send_requested = !(distance_distanceirrear_update_send());
+    is_actors_actors_send_requested = !(actors_actors_update_send());
   }
-  if(is_distance_distanceusfront_send_requested)
+  if(is_actors_actors_genericactor_set_requested)
   {
-    is_distance_distanceusfront_send_requested = !(distance_distanceusfront_update_send());
+    is_actors_actors_genericactor_set_requested = !(actors_actors_update_set_genericactor());
   }
-  if(is_distance_distanceusrear_send_requested)
+  if(is_drive_speedandangle_send_requested)
   {
-    is_distance_distanceusrear_send_requested = !(distance_distanceusrear_update_send());
-  }
-  if(is_batterylevel_batterylevel_send_requested)
-  {
-    is_batterylevel_batterylevel_send_requested = !(batterylevel_batterylevel_update_send());
-  }
-  if(is_generic_genericsensor1_send_requested)
-  {
-    is_generic_genericsensor1_send_requested = !(generic_genericsensor1_update_send());
-  }
-  if(is_generic_genericsensor2_send_requested)
-  {
-    is_generic_genericsensor2_send_requested = !(generic_genericsensor2_update_send());
+    is_drive_speedandangle_send_requested = !(drive_speedandangle_update_send());
   }
 }
 

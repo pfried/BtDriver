@@ -71,6 +71,9 @@
 // From module: Interrupt management - XMEGA implementation
 #include <interrupt.h>
 
+// From module: PMIC - Programmable Multi-level Interrupt Controller
+#include <pmic.h>
+
 // From module: Part identification macros
 #include <parts.h>
 
@@ -81,8 +84,18 @@
 #include <spi_master.h>
 #include <spi_master.h>
 
+// From module: Sleep Controller driver
+#include <sleep.h>
+
+// From module: Sleep manager - XMEGA A/AU/B/D implementation
+#include <sleepmgr.h>
+#include <xmega/sleepmgr.h>
+
 // From module: System Clock Control - XMEGA A1/A3/A3B/A4/D/E implementation
 #include <sysclk.h>
+
+// From module: TC4/5 - Timer Counter type 4 /5
+#include <tc45.h>
 
 // From module: XMEGA compiler driver
 #include <compiler.h>

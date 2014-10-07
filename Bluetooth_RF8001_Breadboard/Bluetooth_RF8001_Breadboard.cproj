@@ -2,7 +2,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectVersion>6.1</ProjectVersion>
+    <ProjectVersion>6.2</ProjectVersion>
     <ProjectGuid>{f7802bc7-201c-459d-b039-6e8b2d34fc75}</ProjectGuid>
     <Name>$(MSBuildProjectName)</Name>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
@@ -15,6 +15,7 @@
           <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.spi_master" value="Add" config="standard_spi" content-id="Atmel.ASF" />
           <option id="xmega.drivers.ioport" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="xmega.drivers.tc45" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.applications.user_application" value="Add" config="" content-id="Atmel.ASF" />
         </options>
         <configurations>
@@ -69,6 +70,14 @@
           <file path="src/Config/conf_spi_master.h" framework="" version="3.11.0" source="common\services\spi\xmega_spi\module_config\conf_spi_master.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/delay/delay.h" framework="" version="3.11.0" source="common\services\delay\delay.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/delay/xmega/cycle_counter.h" framework="" version="3.11.0" source="common\services\delay\xmega\cycle_counter.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/pmic/pmic.h" framework="" version="3.11.0" source="xmega\drivers\pmic\pmic.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/sleep/sleep.h" framework="" version="3.11.0" source="xmega\drivers\sleep\sleep.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/tc45/tc45.c" framework="" version="3.11.0" source="xmega\drivers\tc45\tc45.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/xmega/drivers/tc45/tc45.h" framework="" version="3.11.0" source="xmega\drivers\tc45\tc45.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/sleepmgr/xmega/sleepmgr.c" framework="" version="3.11.0" source="common\services\sleepmgr\xmega\sleepmgr.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/sleepmgr/sleepmgr.h" framework="" version="3.11.0" source="common\services\sleepmgr\sleepmgr.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/sleepmgr/xmega/sleepmgr.h" framework="" version="3.11.0" source="common\services\sleepmgr\xmega\sleepmgr.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_sleepmgr.h" framework="" version="3.11.0" source="common\services\sleepmgr\xmega\module_config\conf_sleepmgr.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.11.0/common.applications.user_application.xmega_e5_xplained/html/index.html" />
         <offline-documentation help="" />
@@ -143,6 +152,10 @@
             <Value>../src/ASF/common/services/spi/xmega_spi</Value>
             <Value>../src/ASF/common/services/spi</Value>
             <Value>../src/ASF/common/services/delay</Value>
+            <Value>../src/ASF/xmega/drivers/pmic</Value>
+            <Value>../src/ASF/xmega/drivers/sleep</Value>
+            <Value>../src/ASF/xmega/drivers/tc45</Value>
+            <Value>../src/ASF/common/services/sleepmgr</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize for size (-Os)</avrgcc.compiler.optimization.level>
@@ -169,6 +182,10 @@
             <Value>../src/ASF/common/services/spi/xmega_spi</Value>
             <Value>../src/ASF/common/services/spi</Value>
             <Value>../src/ASF/common/services/delay</Value>
+            <Value>../src/ASF/xmega/drivers/pmic</Value>
+            <Value>../src/ASF/xmega/drivers/sleep</Value>
+            <Value>../src/ASF/xmega/drivers/tc45</Value>
+            <Value>../src/ASF/common/services/sleepmgr</Value>
           </ListValues>
         </avrgcc.assembler.general.IncludePaths>
       </AvrGcc>
@@ -214,6 +231,10 @@
             <Value>../src/iasCar/services</Value>
             <Value>../src/iasCar/drivers/bluetooth</Value>
             <Value>../src/iasCar/drivers/bt_active_led</Value>
+            <Value>../src/ASF/xmega/drivers/pmic</Value>
+            <Value>../src/ASF/xmega/drivers/sleep</Value>
+            <Value>../src/ASF/xmega/drivers/tc45</Value>
+            <Value>../src/ASF/common/services/sleepmgr</Value>
           </ListValues>
         </avrgcc.compiler.directories.IncludePaths>
         <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -241,6 +262,10 @@
             <Value>../src/ASF/common/services/spi/xmega_spi</Value>
             <Value>../src/ASF/common/services/spi</Value>
             <Value>../src/ASF/common/services/delay</Value>
+            <Value>../src/ASF/xmega/drivers/pmic</Value>
+            <Value>../src/ASF/xmega/drivers/sleep</Value>
+            <Value>../src/ASF/xmega/drivers/tc45</Value>
+            <Value>../src/ASF/common/services/sleepmgr</Value>
           </ListValues>
         </avrgcc.assembler.general.IncludePaths>
         <avrgcc.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcc.assembler.debugging.DebugLevel>
@@ -292,6 +317,15 @@
     <None Include="src\ASF\common\services\delay\xmega\cycle_counter.h">
       <SubType>compile</SubType>
     </None>
+    <None Include="src\ASF\common\services\sleepmgr\sleepmgr.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\sleepmgr\xmega\sleepmgr.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\sleepmgr\xmega\sleepmgr.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\common\services\spi\xmega_spi\spi_master.c">
       <SubType>compile</SubType>
     </Compile>
@@ -302,6 +336,12 @@
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\xmega\drivers\cpu\xmega_reset_cause.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\xmega\drivers\pmic\pmic.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\xmega\drivers\sleep\sleep.h">
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\ASF\xmega\drivers\spi\spi.c">
@@ -316,6 +356,12 @@
     <None Include="src\config\conf_spi_master.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\ASF\xmega\drivers\tc45\tc45.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\xmega\drivers\tc45\tc45.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\bluetooth\BluetoothCar.h">
       <SubType>compile</SubType>
     </Compile>
@@ -325,40 +371,34 @@
     <Compile Include="src\bluetooth\drivers\bluetooth\bluetooth.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\battery.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\actors.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\battery.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\actors.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\brightness.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\characteristic_util.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\brightness.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\characteristic_util.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_front.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_front.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_rear.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\sensors.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_ir_rear.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\sensors.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_us_front.c">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\speed_and_angle.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_us_front.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_us_rear.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\distance_us_rear.h">
+    <Compile Include="src\bluetooth\drivers\bluetooth\characteristics\speed_and_angle.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\bluetooth\drivers\bluetooth\lib\aci.h">
@@ -448,6 +488,9 @@
     <Compile Include="src\bluetooth\services\btcar.h">
       <SubType>compile</SubType>
     </Compile>
+    <None Include="src\config\conf_sleepmgr.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\main.c">
       <SubType>compile</SubType>
     </Compile>
@@ -544,6 +587,8 @@
     <Folder Include="src\ASF\common\services\gpio\xmega_gpio\" />
     <Folder Include="src\ASF\common\services\ioport\" />
     <Folder Include="src\ASF\common\services\ioport\xmega\" />
+    <Folder Include="src\ASF\common\services\sleepmgr\" />
+    <Folder Include="src\ASF\common\services\sleepmgr\xmega\" />
     <Folder Include="src\ASF\common\services\spi\" />
     <Folder Include="src\ASF\common\services\spi\xmega_spi\" />
     <Folder Include="src\ASF\common\utils\" />
@@ -554,7 +599,10 @@
     <Folder Include="src\ASF\xmega\boards\xmega_e5_xplained\" />
     <Folder Include="src\ASF\xmega\drivers\" />
     <Folder Include="src\ASF\xmega\drivers\cpu\" />
+    <Folder Include="src\ASF\xmega\drivers\pmic\" />
+    <Folder Include="src\ASF\xmega\drivers\sleep\" />
     <Folder Include="src\ASF\xmega\drivers\spi\" />
+    <Folder Include="src\ASF\xmega\drivers\tc45\" />
     <Folder Include="src\ASF\xmega\utils\" />
     <Folder Include="src\ASF\xmega\utils\assembler\" />
     <Folder Include="src\ASF\xmega\utils\bit_handling\" />
