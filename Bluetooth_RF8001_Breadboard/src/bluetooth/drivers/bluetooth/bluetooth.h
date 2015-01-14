@@ -9,6 +9,7 @@
 #ifndef BLUETOOTH_H_
 #define BLUETOOTH_H_
 
+#include <asf.h>
 #include <ioport.h>
 #include <spi_master.h>
 #include <stdint.h>
@@ -18,9 +19,18 @@
 #include "lib/services.h"
 #include "../../services/btcar.h"
 
+#include "../bt_active_led/bt_active_led.h"
+
+#include "characteristics/sensors.h"
+#include "characteristics/distance.h"
+#include "characteristics/actors.h"
+#include "characteristics/speed_and_angle.h"
+
 
 #define BLUETOOTH_DATA_RATE 1
 #define BLUETOOTH_SAFETY_TOP 30
+
+#define BLUETOOTH_INTERFACE_IS_INTERRUPT false
 
 #define BLUETOOTH_RX_BUFFER_SIZE 8
 #define BLUETOOTH_TX_BUFFER_SIZE 8
@@ -63,6 +73,7 @@ typedef void (*bt_callback_t)(void);
 void bluetooth_init(bluetooth_config_t *bluetooth_config, bluetooth_car_t *bluetooth_car);
 void bluetooth_process(void);
 void bluetooth_values_process(void);
+bool bluetoothTestSPI(void);
 
 bool digitalRead(port_pin_t pin);
 void digitalWrite(port_pin_t pin, bool value);
