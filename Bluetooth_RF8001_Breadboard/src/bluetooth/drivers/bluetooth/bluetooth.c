@@ -468,11 +468,11 @@ void bluetooth_process(void) {
 			// The test mode of the nrf provides an echo command which echos back any packages for testing purposes
 			case ACI_EVT_ECHO:
 			{
-				if (0 != memcmp(&echo_data[0], &(aci_evt->params.echo.echo_data[0]), sizeof(echo_data))) {
+				//if (0 != memcmp(&echo_data[0], &(aci_evt->params.echo.echo_data[0]), sizeof(echo_data))) {
 					// Echo test failed
-				} else {
+				//} else {
 					// Echo test succeeded
-				}
+				//}
 				break;
 			}
 			
